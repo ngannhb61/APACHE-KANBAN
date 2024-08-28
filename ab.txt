@@ -1,0 +1,53 @@
+WITH WorkDayCTE AS (
+    SELECT *
+    FROM sjqdms_work_day
+    WHERE to_char(work_day, 'yyyy/mm/dd') = '2024/02/24' ---old date
+        AND inout_pz = 'OUT'
+        AND (WORK_QTY - FINISH_QTY) > 0
+)
+SELECT 
+    ORG_ID,
+    SE_ID,
+    1 AS SE_SEQ,
+    PO,
+    to_date('2099/12/30', 'yyyy/mm/dd') AS SE_DAY,
+    'S' AS COLUMN1,
+    COLUMN2,
+    COLUMN3,
+    COLUMN4,
+    NOTE,
+    STATUS,
+    (SELECT GRT_DEPT FROM WorkDayCTE WHERE se_id = a.se_id AND production_order = a.production_order AND d_dept = a.d_dept AND main_prod_order = a.main_prod_order AND po = a.po AND GRT_DEPT <> 'manually' ORDER BY work_day DESC FETCH FIRST 1 ROW ONLY) AS GRT_DEPT,
+    (SELECT GRT_USER FROM WorkDayCTE WHERE se_id = a.se_id AND production_order = a.production_order AND d_dept = a.d_dept AND main_prod_order = a.main_prod_order AND po = a.po AND GRT_USER <> 'manually' ORDER BY work_day DESC FETCH FIRST 1 ROW ONLY) AS GRT_USER,
+    (SELECT LAST_USER FROM WorkDayCTE WHERE se_id = a.se_id AND production_order = a.production_order AND d_dept = a.d_dept AND main_prod_order = a.main_prod_order AND po = a.po AND LAST_USER <> 'manually' ORDER BY work_day DESC FETCH FIRST 1 ROW ONLY) AS LAST_USER,
+    SYSDATE AS LAST_DATE,
+    COLUMN5,
+    SYSDATE AS INSERT_DATE,
+    D_DEPT,
+    to_date('2024/02/26', 'yyyy/mm/dd') AS WORK_DAY, ---new date
+    ROUT_NO,
+    SUM(WORK_QTY) - SUM(FINISH_QTY) AS WORK_QTY,
+    ART_NO,
+    0 AS FINISH_QTY,
+    SUM(SUPPLEMENT_QTY) AS SUPPLEMENT_QTY,
+    INOUT_PZ,
+    production_order,
+    main_prod_order
+FROM (SELECT * FROM (SELECT tt.*, rownum r FROM WorkDayCTE tt) bbb WHERE bbb.r > 0) a
+GROUP BY 
+    ORG_ID,
+    SE_ID,
+    PO,
+    COLUMN2,
+    COLUMN3,
+    COLUMN4,
+    NOTE,
+    STATUS,
+    COLUMN5,
+    D_DEPT,
+    WORK_DAY,
+    ROUT_NO,
+    ART_NO,
+    INOUT_PZ,
+    production_order,
+    main_prod_order;
