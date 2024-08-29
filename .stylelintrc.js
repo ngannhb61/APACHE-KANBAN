@@ -5,6 +5,7 @@ module.exports = {
     'stylelint-config-prettier',
   ],
   defaultSeverity: 'warning',
+  customSyntax: 'postcss-html',
   plugins: ['stylelint-order'],
   rules: {
     'at-rule-no-unknown': [

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="logo">
       <img alt="logo" :src="logoImage" style="width: 15%" />
-      <div class="logo-text">APACHE</div>
+      <div class="logo-text">APACHE - Kanban</div>
     </div>
     <LoginBanner />
     <div class="content">
