@@ -1,0 +1,15 @@
+export default {
+  'ProcessLineDashboard.top.title': 'Processing Line Dashboard',
+  'ProcessLineDashboard.left.title1': 'Basic Information',
+  'ProcessLineDashboard.left.title2': 'PPH',
+  'ProcessLineDashboard.left.title3': 'Daily Production Of Shoe Types',
+  'ProcessLineDashboard.center.title1': 'Production Group',
+  'ProcessLineDashboard.center.title2': 'Production Achievement Rate',
+  'ProcessLineDashboard.center.title3': 'Quality Management',
+  'ProcessLineDashboard.center.title4': 'Abnormal Quality',
+  'ProcessLineDashboard.center.title5': 'Problem Tracking',
+  'ProcessLineDashboard.right.title1': 'Group Members',
+  'ProcessLineDashboard.right.title2': 'Device Management',
+  'ProcessLineDashboard.right.title3': 'Bottom Matching',
+  'ProcessLineDashboard.right.title4': 'No Matching Order Information',
+};

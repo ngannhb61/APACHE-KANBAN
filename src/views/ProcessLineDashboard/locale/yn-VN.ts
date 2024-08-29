@@ -1,0 +1,15 @@
+export default {
+  'ProcessLineDashboard.top.title': 'Dây chuyền sản xuất Kanban',
+  'ProcessLineDashboard.left.title1': 'Thông tin cơ bản',
+  'ProcessLineDashboard.left.title2': 'PPH',
+  'ProcessLineDashboard.left.title3': 'Loại giày Sản lượng hàng ngày',
+  'ProcessLineDashboard.center.title1': 'Nhóm sản xuất',
+  'ProcessLineDashboard.center.title2': 'Tỷ lệ hoàn thành sản xuất mỗi giờ',
+  'ProcessLineDashboard.center.title3': 'Quản lý chất lượng',
+  'ProcessLineDashboard.center.title4': 'Chất lượng bất thường',
+  'ProcessLineDashboard.center.title5': 'Theo dõi vấn đề',
+  'ProcessLineDashboard.right.title1': 'Nhóm khác.',
+  'ProcessLineDashboard.right.title2': 'Quản lý thiết bị',
+  'ProcessLineDashboard.right.title3': 'Mặt dưới phù hợp',
+  'ProcessLineDashboard.right.title4': 'Không có thông tin đặt hàng trong ngày',
+};

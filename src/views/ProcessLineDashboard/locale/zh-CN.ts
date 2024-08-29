@@ -1,0 +1,15 @@
+export default {
+  'ProcessLineDashboard.top.title': '加工线生产看板',
+  'ProcessLineDashboard.left.title1': '生产线基本信息',
+  'ProcessLineDashboard.left.title2': 'PPH',
+  'ProcessLineDashboard.left.title3': '鞋型日产量',
+  'ProcessLineDashboard.center.title1': '生产组别',
+  'ProcessLineDashboard.center.title2': '每小时生产达成率',
+  'ProcessLineDashboard.center.title3': '品质管理-当日前五大不良原因',
+  'ProcessLineDashboard.center.title4': '品质异常',
+  'ProcessLineDashboard.center.title5': '问题追踪',
+  'ProcessLineDashboard.right.title1': '组别人员',
+  'ProcessLineDashboard.right.title2': '设备管理',
+  'ProcessLineDashboard.right.title3': '面底配套',
+  'ProcessLineDashboard.right.title4': '当日未配套订单信息',
+};
