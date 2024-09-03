@@ -36,7 +36,7 @@ module.exports = {
     },
   },
   rules: {
-    'prettier/prettier': 1,
+    'prettier/prettier': 0,
     // Vue: Recommended rules to be closed or modify
     'vue/require-default-prop': 0,
     'vue/singleline-html-element-content-newline': 0,
@@ -49,8 +49,8 @@ module.exports = {
     'vue/multi-word-component-names': 0,
     // Allow @ts-ignore comment
     '@typescript-eslint/ban-ts-comment': 0,
-    '@typescript-eslint/no-unused-vars': 1,
-    '@typescript-eslint/no-empty-function': 1,
+    '@typescript-eslint/no-unused-vars': 0,
+    '@typescript-eslint/no-empty-function': 0,
     '@typescript-eslint/no-explicit-any': 0,
     'import/extensions': [
       2,
@@ -66,5 +66,7 @@ module.exports = {
     'no-param-reassign': 0,
     'prefer-regex-literals': 0,
     'import/no-extraneous-dependencies': 0,
+    'no-use-before-define': ["error", { "functions": false }],
+    'prefer-const': 0,
   },
 };

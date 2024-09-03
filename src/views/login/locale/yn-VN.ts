@@ -1,5 +1,5 @@
 export default {
-  'login.form.title': 'Đăng nhập Kanban sản xuất TPM',
+  'login.form.title': 'Đăng nhập Kanban APH',
   'login.form.userName.errMsg': 'Tên người dùng không được để trống',
   'login.form.password.errMsg': 'Mật khẩu không được để trống',
   'login.form.login.errMsg': 'Lỗi đăng nhập, làm mới nhẹ Thử lại',
@@ -10,8 +10,8 @@ export default {
   'login.form.forgetPassword': 'Quên mật khẩu',
   'login.form.login': 'Đăng nhập',
   'login.form.register': 'Đăng ký tài khoản',
-  'login.banner.slogan1': 'Welcom to TPM Kanban',
-  'login.banner.subSlogan1': 'TPM Kanban',
+  'login.banner.slogan1': 'Welcom to Kanban',
+  'login.banner.subSlogan1': 'Kanban APH',
   'login.banner.slogan2': 'APACHE',
   'login.banner.subSlogan2': 'APH',
   'login.banner.slogan3': 'APACHE',

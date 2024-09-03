@@ -195,6 +195,8 @@ export async function getGroupMembers(param: any) {
   } else {
     result.data = JSON.parse(data.RetData) as any;
   }
+  console.log(result.data);
+  
   return result;
 }
 

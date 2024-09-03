@@ -98,11 +98,8 @@
         <template v-else>{{ rightTitle }}</template>
       </div>
       <div class="hd-right-full">
-        <a-link @click="toggleFullScreen" class="fullscreen-link">
-          <img
-            src="@/assets/images/white-full-screen.png"
-            class="fullscreen-img"
-          />
+        <a-link @click="toggleFullScreen">
+          <svg xmlns="http://www.w3.org/2000/svg" width="35" height="20" viewBox="0 0 512 512"><path fill="currentColor" d="M21 512h107q21 0 21-21q0-22-21-22H73l134-134q13-15 0-30q-15-13-30 0L43 439v-55q0-21-22-21q-21 0-21 21v107q0 9 6 15t15 6zm470-149q-22 0-22 21v55L335 305q-15-13-30 0q-13 15 0 30l134 134h-55q-21 0-21 22q0 21 21 21h107q9 0 15-6t6-15V384q0-21-21-21zm0-363H384q-21 0-21 21q0 22 21 22h55L305 177q-13 15 0 30q6 6 15 6t15-6L469 73v55q0 21 22 21q21 0 21-21V21q0-9-6-15t-15-6zM21 149q22 0 22-21V73l134 134q6 6 15 6t15-6q13-15 0-30L73 43h55q21 0 21-22q0-21-21-21H21Q12 0 6 6T0 21v107q0 21 21 21z"/></svg>
         </a-link>
       </div>
     </div>
@@ -176,13 +173,13 @@
 
   // 星期几的中文表示
   const weekDays = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
+    '星期天',
+    '星期一',
+    '星期二',
+    '星期三',
+    '星期四',
+    '星期五',
+    '星期六',
   ];
   const datetime = ref('');
   const showHome = ref(true);
@@ -196,7 +193,7 @@
 
   function getTimes() {
     const weekDayName = weekDays[new Date().getDay()];
-    return formatNowDate(`${weekDayName}, yyyy/MM/dd HH:mm:ss`);
+    return formatNowDate(`yyyy-MM-dd ${weekDayName} HH:mm:ss`);
   }
 
   function exitFullScreen() {
@@ -367,25 +364,5 @@
 
   :deep(.arco-link:hover) {
     background-color: red;
-  }
-
-  .fullscreen-link {
-    display: inline-block;
-    transition: color 0.3s;
-  }
-
-  .fullscreen-img {
-    width: 30px;
-    height: 33px;
-    transition: filter 0.3s;
-  }
-
-  /* Hover effect */
-  .fullscreen-link:hover {
-    color: red;
-  }
-
-  .fullscreen-link:hover .fullscreen-img {
-    filter: brightness(0) invert(1);
   }
 </style>

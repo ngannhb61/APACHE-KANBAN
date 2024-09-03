@@ -1,9 +1,9 @@
 export default {
-  'login.form.title': 'Login to Kanban Production TPM',
+  'login.form.title': 'Login to Kanban APH',
   'login.form.userName.errMsg': 'Username cannot be empty',
   'login.form.password.errMsg': 'Password cannot be empty',
   'login.form.login.errMsg': 'Login error, refresh and try again',
-  'login.form.login.success': 'welcome to TPM Kanban',
+  'login.form.login.success': 'welcome to APH Kanban',
   'login.form.userName.placeholder': 'Username: 50759',
   'login.form.password.placeholder': 'Password: Qq123456',
   'login.form.rememberPassword': 'Remember password',

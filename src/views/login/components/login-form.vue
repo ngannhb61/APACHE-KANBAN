@@ -16,7 +16,7 @@
     <a-spin
       :loading="loading"
       tip="Loggin...(Logging in...)"
-      style="width: 100%；height:100%"
+      style="width: 100%; height: 100%;"
     >
       <a-form
         ref="loginForm"

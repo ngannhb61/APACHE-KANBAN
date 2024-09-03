@@ -6,6 +6,7 @@ import DailyProduction from '@/views/report/F_SCM_DailyProduction_Output/locale/
 import F_PERMISSION_MANGE from '@/views/permission/F_PERMISSION_MANGE/locale/zh-CN';
 
 import localbaoyangdetail from '@/views/device_management/maintenanceDetails/locale/zh-CN';
+import localProcessLineCN from '@/views/dashboard/ProcessLineDashboard/locale/zh-CN';
 import localDeviceMain from '@/views/device_management/Kanban_device_A/locale/zh-CN';
 import localrepairdetail from '@/views/device_management/repairDetails/locale/zh-CN';
 import localeSettings from './zh-CN/settings';
@@ -41,6 +42,7 @@ export default {
   ...localeMessageBox,
   ...localeLogin,
   ...localeWorkplace,
+  ...localProcessLineCN,
   ...DailyProduction,
   ...F_PERMISSION_MANGE,
   ...localbaoyangdetail,

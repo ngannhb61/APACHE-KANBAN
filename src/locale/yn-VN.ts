@@ -3,6 +3,7 @@ import localeLogin from '@/views/login/locale/yn-VN';
 import F_PERMISSION_MANGE from '@/views/permission/F_PERMISSION_MANGE/locale/yn-VN';
 
 import localbaoyangdetail from '@/views/device_management/maintenanceDetails/locale/yn-VN';
+import localProcessLineVN from '@/views/dashboard/ProcessLineDashboard/locale/yn-VN';
 import localDeviceMain from '@/views/device_management/Kanban_device_A/locale/yn-VN';
 import localrepairdetail from '@/views/device_management/repairDetails/locale/yn-VN';
 import localeSettings from './yn-VN/settings';
@@ -39,6 +40,7 @@ export default {
   ...localeLogin,
   ...F_PERMISSION_MANGE,
   ...localbaoyangdetail,
+  ...localProcessLineVN,
   ...localDeviceMain,
   ...localrepairdetail,
 };

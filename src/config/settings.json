@@ -12,8 +12,8 @@
   "device": "desktop",
   "tabBar": true,
   "menuFromServer": true,
-  "api_url": "http://10.30.1.191:8092//api/CommonCall",
+  "api_url": "http://localhost:60626/api/CommonCall",
   "serverMenu": [],
-  "CompanyCode": "APHMESTEST02",
-  "CompanyName": "APHMESTEST500"
+  "CompanyCode": "aphmes",
+  "CompanyName": "aphmes"
 }

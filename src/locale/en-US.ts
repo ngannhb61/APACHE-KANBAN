@@ -6,6 +6,7 @@ import DailyProduction from '@/views/report/F_SCM_DailyProduction_Output/locale/
 import F_PERMISSION_MANGE from '@/views/permission/F_PERMISSION_MANGE/locale/en-US';
 
 import localbaoyangdetail from '@/views/device_management/maintenanceDetails/locale/en-US';
+import localProcessLineUS from '@/views/dashboard/ProcessLineDashboard/locale/en-US';
 import localDeviceMain from '@/views/device_management/Kanban_device_A/locale/en-US';
 import localrepairdetail from '@/views/device_management/repairDetails/locale/en-US';
 import localeSettings from './en-US/settings';
@@ -42,6 +43,7 @@ export default {
   ...localeLogin,
   ...localeWorkplace,
   ...DailyProduction,
+  ...localProcessLineUS,
   ...F_PERMISSION_MANGE,
   ...localbaoyangdetail,
   ...localDeviceMain,
