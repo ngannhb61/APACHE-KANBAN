@@ -41,7 +41,7 @@
                   $t('ProcessLineDashboard.left.title1')
                 }}</div>
                 <div class="person-box">
-                  <div>Team Leader</div>
+                  <div> Supervisor </div>
                   <div> Section Head </div>
                   <div> Manager </div>
                 </div>
@@ -390,7 +390,7 @@
     waitTime: 5000,
     fontSize: 28,
     color: '#0272FC',
-    unit: '双',
+    unit: 'pair',
   });
 
   const getShoeTypeProduction = async () => {
@@ -445,18 +445,18 @@
   productionRate.value = reactive({
     header: [
       'Time',
-      'Target Output',
-      'Actual Output',
-      'TQC Defect No.',
-      'Product achievement %',
+      'Target',
+      'Actual',
+      'TQC Defect',
+      'Product %',
       'RFT %',
-      'Operator hours',
+      'Working hour',
       'PPH',
-      'Line downtime',
+      'Line time',
     ],
     data: [],
     index: false,
-    columnWidth: [215, 160, 160, 160, 175, 135, 140, 140, 140],
+    columnWidth: [220, 130, 130, 190, 160, 160, 220, 130, 160],
     align: [
       'center',
       'center',
@@ -524,12 +524,12 @@
   abnormalQuality.value = reactive({
     header: [
       'Month',
-      '<div style="line-height: 1.2;"><div>Internal</div><div>Batch exception</div></div>',
-      '<div style="line-height: 1.2;"><div>Internal</div><div>Abnormal box turning</div></div>',
-      '<div style="line-height: 1.2;"><div>Internal</div><div>Major anomalies</div></div>',
-      '<div style="color:#32C5E9;line-height: 1.2;"><div>External</div><div>Batch exception</div></div>',
-      '<div style="color:#32C5E9;line-height: 1.2;"><div>External</div><div>Abnormal box turning</div></div>',
-      '<div style="color:#32C5E9;line-height: 1.2;"><div>External</div><div>Major anomalies</div></div>',
+      '<div style="line-height: 1.2;"><div>Internal</div><div>Batch</div></div>',
+      '<div style="line-height: 1.2;"><div>Internal</div><div>Abnormal</div></div>',
+      '<div style="line-height: 1.2;"><div>Internal</div><div>Major</div></div>',
+      '<div style="color:#32C5E9;line-height: 1.2;"><div>External</div><div>Batch</div></div>',
+      '<div style="color:#32C5E9;line-height: 1.2;"><div>External</div><div>Abnormal</div></div>',
+      '<div style="color:#32C5E9;line-height: 1.2;"><div>External</div><div>Major</div></div>',
     ],
     data: [],
     index: false,
@@ -854,7 +854,7 @@
           case 'Borrow':
             deviceColor.push('#0272FC');
             break;
-          case 'Under maintenance':
+          case 'Maintenance':
           case 'Waiting repair':
             deviceColor.push('#EC808D');
             break;
@@ -1156,6 +1156,7 @@
     div {
       flex: 1;
       background-color: #0c244d;
+      font-size: 50%;
     }
   }
 
