@@ -507,13 +507,13 @@
 
   // 中间-获取品质管理-当日前五大不良原因
   qualityManagement.value = reactive({
-    header: ['检验项目', '不良数', '不良占比'],
+    header: ['Inspection items', 'No. defect', 'Defect rate'],
     data: [],
     index: false,
     columnWidth: [770, 230, 230],
     align: ['center', 'center', 'center'],
     rowNum: [5],
-    indexHeader: ['序号'],
+    indexHeader: ['No.'],
     waitTime: 3000,
     hoverPause: false,
     headerBGC: '#0C244D',
@@ -523,13 +523,13 @@
   // 中间-获取品质异常
   abnormalQuality.value = reactive({
     header: [
-      '月份',
-      '<div style="line-height: 1.2;"><div>内部</div><div>批量异常</div></div>',
-      '<div style="line-height: 1.2;"><div>内部</div><div>翻箱异常</div></div>',
-      '<div style="line-height: 1.2;"><div>内部</div><div>重大异常</div></div>',
-      '<div style="color:#32C5E9;line-height: 1.2;"><div>外部</div><div>批量异常</div></div>',
-      '<div style="color:#32C5E9;line-height: 1.2;"><div>外部</div><div>翻箱异常</div></div>',
-      '<div style="color:#32C5E9;line-height: 1.2;"><div>外部</div><div>重大异常</div></div>',
+      'Month',
+      '<div style="line-height: 1.2;"><div>Internal</div><div>Batch exception</div></div>',
+      '<div style="line-height: 1.2;"><div>Internal</div><div>Abnormal box turning</div></div>',
+      '<div style="line-height: 1.2;"><div>Internal</div><div>Major anomalies</div></div>',
+      '<div style="color:#32C5E9;line-height: 1.2;"><div>External</div><div>Batch exception</div></div>',
+      '<div style="color:#32C5E9;line-height: 1.2;"><div>External</div><div>Abnormal box turning</div></div>',
+      '<div style="color:#32C5E9;line-height: 1.2;"><div>External</div><div>Major anomalies</div></div>',
     ],
     data: [],
     index: false,
@@ -544,7 +544,7 @@
       'center',
     ],
     rowNum: [5],
-    indexHeader: ['序号'],
+    indexHeader: ['No.'],
     waitTime: 3000,
     hoverPause: false,
     headerBGC: '#0C244D',
@@ -611,13 +611,13 @@
 
   // 中间-获取问题追踪
   questionTracking.value = reactive({
-    header: ['问题编号', '问题项', '责任单位', '负责人', '问题提报日期'],
+    header: ['Question No.', 'Question item', 'Responsible unit', 'Person charge', 'Issue date'],
     data: [],
     index: false,
     columnWidth: [125, 190, 100, 90, 130],
     align: ['center', 'center', 'center', 'center', 'center'],
     rowNum: [5],
-    indexHeader: ['序号'],
+    indexHeader: ['No.'],
     waitTime: 3000,
     hoverPause: false,
     headerBGC: '#0C244D',
@@ -638,7 +638,7 @@
         },
       },
       {
-        text: '未完成度',
+        text: 'In complete',
         top: '53%',
         textAlign: 'center',
         left: '50%',
@@ -669,9 +669,9 @@
 
   function getIncompleteData(dayRate: any) {
     const data: any = [];
-    data.push({ name: '已完成', value: dayRate });
-    data.push({ name: '未完成', value: 100 - dayRate });
-    incompleteOption.value.title[0].text = `${dayRate}%`;
+    data.push({ name: 'Completed', value: dayRate });
+    data.push({ name: 'Close', value: 100 - dayRate });
+    incompleteOption.value.title[0].text = `${dayRate} %`;
     incompleteOption.value.series[0].data = data;
   }
 
@@ -850,18 +850,18 @@
         deviceSum.push(item.TOTAL);
         devicePercent.push(item.RATE);
         switch (item.DEVICE_NAME) {
-          case '使用中':
-          case '借出':
+          case 'In use':
+          case 'Borrow':
             deviceColor.push('#0272FC');
             break;
-          case '维修中':
-          case '待维修':
+          case 'Under maintenance':
+          case 'Waiting repair':
             deviceColor.push('#EC808D');
             break;
-          case '闲置':
+          case 'Idle':
             deviceColor.push('#7F7F7F');
             break;
-          case '报废':
+          case 'Reject':
             deviceColor.push('#B50B24');
             break;
           default:
