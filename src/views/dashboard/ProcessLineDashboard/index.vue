@@ -2,245 +2,308 @@
   <dv-full-screen-container class="full">
     <VScaleScreen width="1920" height="1080" :full-screen="true">
       <Header
-        :title="pageTitle"
+        :title="$t('ProcessLineDashboard.top.title')"
         line-color="rgba(14,228,249, 1)"
-        :center-style="{ color: '#0EE4F9', fontSize: '40px' }"
+        :center-style="{ color: '#0EE4F9' }"
         :right-style="{ color: 'white' }"
       ></Header>
-      <div style="position: fixed; left: 15px; top: 75px; z-index: 9999">
-        <div class="selector-title">
-          <span style="margin-left: 5px"
-            >{{ $t('ProcessLineDashboard.center.title1') }}：</span
-          >
-          <a-select
-            v-model="productionGroup"
-            size="large"
-            :style="{ width: '250px' }"
-            @change="handleChangeProGroup"
-          >
-            <a-option
-              v-for="item in productionGroupOptions"
-              :key="item.value"
-              :value="item.value"
-              style="font-size: 20px"
-              >{{ item.name }}
-            </a-option>
-          </a-select>
-          <span style="margin-left: 15px; color: #fd2104; font-size: 20px">{{
-            errorMsg
-          }}</span>
-        </div>
-      </div>
       <div class="container">
-        <template v-if="showPage === 1">
-          <a-row class="container-row" :gutter="24">
-            <!-- 左边 -->
-            <a-col :span="6" class="padding-leftright-0">
-              <dv-border-box-12 :color="borderColor" class="page-one-box-1">
-                <div class="vertical-line">{{
-                  $t('ProcessLineDashboard.left.title1')
-                }}</div>
-                <div class="person-box">
-                  <div> Supervisor </div>
-                  <div> Section Head </div>
-                  <div> Manager </div>
-                </div>
-                <div class="person-box">
-                  <div style="background-color: #0a2732">{{
-                    leaderInfo.zz
-                  }}</div>
-                  <div style="background-color: #0a2732">{{
-                    leaderInfo.bz
-                  }}</div>
-                  <div style="background-color: #0a2732">{{
-                    leaderInfo.fl
-                  }}</div>
-                </div>
-              </dv-border-box-12>
-              <dv-border-box-12 :color="borderColor" class="page-one-box-2">
-                <div class="vertical-line">{{
-                  $t('ProcessLineDashboard.right.title1')
-                }}</div>
-                <dv-active-ring-chart
-                  id="groupMember"
-                  :config="groupMembers"
-                  style="width: 100%; height: 250px"
-                />
-              </dv-border-box-12>
-              <dv-border-box-12 :color="borderColor" class="page-one-box-3">
-                <div class="vertical-line">{{
-                  $t('ProcessLineDashboard.left.title2')
-                }}</div>
-                <div class="box-content">
-                  <div class="flex-row">
-                    <div class="flex-1">
-                      <div class="box-title">Actual PPH month</div>
-                      <div class="border-1 flex-center flex-item">
+        <a-row class="max-height" :gutter="24">
+          <!-- 左边 -->
+          <a-col
+            class="max-height"
+            :span="6"
+            style="padding-left: 0 !important; padding-right: 0 !important"
+          >
+            <div class="max-height flex-column">
+              <div style="padding-bottom: 12px; flex: 1.4">
+                <dv-border-box-12 :color="['#2E6099', '#0EE4F9']">
+                  <div class="max-height max-width padding-15">
+                    <div class="vertical-line">{{
+                      $t('ProcessLineDashboard.left.title1')
+                    }}</div>
+                    <div class="person-box">
+                      <div>Supervisor</div>
+                      <div>Section head</div>
+                      <div>Manager</div>
+                    </div>
+                    <div class="person-box">
+                      <!-- <div style="background-color: #0a2732">{{
+                        leaderInfo.zz
+                      }}</div>
+                      <div style="background-color: #0a2732">{{
+                        leaderInfo.bz
+                      }}</div>
+                      <div style="background-color: #0a2732">{{
+                        leaderInfo.fl
+                      }}</div> -->
+                      <div style="background-color: #0a2732;">Admin-IT</div>
+                      <div style="background-color: #0a2732;">Admin-IT</div>
+                      <div style="background-color: #0a2732;">Admin-IT</div>
+                    </div>
+                    <div class="production-box" style="margin-top: 25px">
+                      <div class="sub">
                         <a-statistic
-                          :value="dayAndMonthPPHOption.monthPPH"
+                          title="Daily target"
+                          :value="productionInfo.workQty"
                           :value-from="0"
-                          :precision="1"
-                          class="pph-info"
+                          :value-style="{ color: '#fe7007' }"
+                          class="production-info"
                           animation
                           show-group-separator
                         >
                         </a-statistic>
+                        <div class="mark"></div>
                       </div>
-                    </div>
-                    <div class="flex-1">
-                      <div class="box-title">Actual PPH day</div>
-                      <div class="border-1 flex-center flex-item">
+
+                      <div class="sub" style="margin-right: 0">
                         <a-statistic
-                          :value="dayAndMonthPPHOption.dayPPH"
+                          title="Actual output"
+                          :value="productionInfo.labelQty"
                           :value-from="0"
-                          :precision="1"
-                          class="pph-info"
+                          :value-style="{ color: '#0AF60A' }"
+                          class="production-info"
                           animation
                           show-group-separator
                         >
                         </a-statistic>
+                        <div class="mark"></div>
+                      </div>
+                    </div>
+                    <div class="production-box">
+                      <div class="sub">
+                        <a-statistic
+                          title="Daily rate"
+                          :value="productionInfo.percentRate"
+                          :value-from="0"
+                          :precision="1"
+                          :value-style="{
+                            color: productionAchievementRateColor,
+                          }"
+                          class="production-info"
+                          animation
+                        >
+                          <template #suffix>%</template>
+                        </a-statistic>
+                        <div class="mark"></div>
+                      </div>
+
+                      <div class="sub" style="margin-right: 0">
+                        <a-statistic
+                          title="% RFT"
+                          :value="productionInfo.rft"
+                          :value-from="0"
+                          :precision="1"
+                          :value-style="{ color: dayRFTColor }"
+                          class="production-info"
+                          animation
+                        >
+                          <template #suffix>%</template>
+                        </a-statistic>
+                        <div class="mark"></div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </dv-border-box-12>
-            </a-col>
-            <!-- 中间 -->
-            <a-col :span="18" style="padding-left: 10px">
-              <dv-border-box-12 :color="borderColor" class="page-one-box-4">
-                <div class="production-box">
-                  <div class="sub">
-                    <a-statistic
-                      title="Daily Target"
-                      :value="productionInfo.workQty"
-                      :value-from="0"
-                      :value-style="{ color: '#fe7007' }"
-                      class="production-info"
-                      animation
-                      show-group-separator
-                    >
-                    </a-statistic>
-                    <div class="mark"></div>
+                </dv-border-box-12>
+              </div>
+              <div class="flex-1" style="padding-bottom: 12px">
+                <dv-border-box-12 :color="['#2E6099', '#0EE4F9']">
+                  <div class="max-height max-width padding-15">
+                    <div class="vertical-line">{{
+                      $t('ProcessLineDashboard.left.title2')
+                    }}</div>
+                    <div class="flex-row">
+                      <div class="flex-1">
+                        <div class="border-1 flex-center flex-item">
+                          <a-statistic
+                            title="Actual month"
+                            :value="dayAndMonthPPHOption.monthPPH"
+                            :value-from="0"
+                            :precision="1"
+                            class="pph-info"
+                            animation
+                            show-group-separator
+                          >
+                          </a-statistic>
+                        </div>
+                      </div>
+                      <div class="flex-1">
+                        <div class="border-1 flex-center flex-item">
+                          <a-statistic
+                            title="Actual day"
+                            :value="dayAndMonthPPHOption.dayPPH"
+                            :value-from="0"
+                            :precision="1"
+                            class="pph-info"
+                            animation
+                            show-group-separator
+                          >
+                          </a-statistic>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-
-                  <div class="sub">
-                    <a-statistic
-                      title="Actual Ouput"
-                      :value="productionInfo.labelQty"
-                      :value-from="0"
-                      :value-style="{ color: '#0AF60A' }"
-                      class="production-info"
-                      animation
-                      show-group-separator
-                    >
-                    </a-statistic>
-                    <div class="mark"></div>
+                </dv-border-box-12>
+              </div>
+              <div class="flex-1" style="padding-bottom: 12px">
+                <dv-border-box-12 :color="['#2E6099', '#0EE4F9']">
+                  <div class="max-height max-width padding-15">
+                    <div class="vertical-line">{{
+                      $t('ProcessLineDashboard.left.title3')
+                    }}</div>
+                    <VCharts
+                      :option="shoeTypeOption"
+                      autoresize
+                    ></VCharts>
                   </div>
-                  <div class="sub">
-                    <a-statistic
-                      title="Daily Rate"
-                      :value="productionInfo.percentRate"
-                      :value-from="0"
-                      :precision="1"
-                      :value-style="{
-                        color: productionAchievementRateColor,
-                      }"
-                      class="production-info"
-                      animation
-                    >
-                      <template #suffix>%</template>
-                    </a-statistic>
-                    <div class="mark"></div>
+                </dv-border-box-12>
+              </div>
+            </div>
+          </a-col>
+          <!-- 中间 -->
+          <a-col class="max-height" :span="12">
+            <div class="max-height flex-column">
+              <div class="selector-title"
+                >{{ $t('ProcessLineDashboard.center.title1') }}：
+                <a-select
+                  v-model="productionGroup"
+                  :style="{ width: '220px' }"
+                  @change="handleChangeProGroup"
+                >
+                  <a-option
+                    v-for="item in productionGroupOptions"
+                    :key="item.value"
+                    :value="item.value"
+                    >{{ item.name }}
+                  </a-option>
+                </a-select>
+                <span
+                  style="margin-left: 15px; color: #fd2104; font-size: 20px"
+                  >{{ errorMsg }}</span
+                >
+              </div>
+              <div style="padding-bottom: 12px; flex: 1.4">
+                <dv-border-box-12 :color="['#2E6099', '#0EE4F9']">
+                  <div class="max-height max-width padding-15">
+                    <div class="vertical-line">{{
+                      $t('ProcessLineDashboard.center.title2')
+                    }}</div>
+                    <dv-scroll-board
+                      :config="productionRate"
+                      style="width: 100%; height: 315px"
+                    />
                   </div>
-
-                  <div class="sub" style="margin-right: 0">
-                    <a-statistic
-                      title="RFT %"
-                      :value="productionInfo.rft"
-                      :value-from="0"
-                      :precision="1"
-                      :value-style="{ color: dayRFTColor }"
-                      class="production-info"
-                      animation
-                    >
-                      <template #suffix>%</template>
-                    </a-statistic>
-                    <div class="mark"></div>
+                </dv-border-box-12>
+              </div>
+              <div style="padding-bottom: 12px; flex: 1">
+                <dv-border-box-12 :color="['#2E6099', '#0EE4F9']">
+                  <div class="flex-row padding-15">
+                    <div style="width: 50%; padding-right: 10px">
+                      <div class="vertical-line">{{
+                        $t('ProcessLineDashboard.center.title3')
+                      }}</div>
+                      <dv-scroll-board
+                        :config="qualityManagement"
+                        style="width: 100%; height: 205px"
+                        class="quality-info"
+                      />
+                    </div>
+                    <div style="width: 50%">
+                      <div class="vertical-line">{{
+                        $t('ProcessLineDashboard.center.title4')
+                      }}</div>
+                      <dv-scroll-board
+                        :config="abnormalQuality"
+                        class="quality-info2"
+                        style="width: 100%; height: 205px"
+                      />
+                    </div>
                   </div>
-                </div>
-              </dv-border-box-12>
-              <dv-border-box-12 :color="borderColor" class="page-one-box-5">
-                <div class="vertical-line">{{
-                  $t('ProcessLineDashboard.center.title2')
-                }}</div>
-                <dv-scroll-board
-                  :config="productionRate"
-                  class="production-rate"
-                  style="width: 100%; height: 636px"
-                />
-              </dv-border-box-12>
-            </a-col>
-          </a-row>
-        </template>
-        <template v-else>
-          <a-row class="container-row" :gutter="24">
-            <!-- 右边 -->
-            <a-col :span="16" class="padding-leftright-0">
-              <!-- 品质管理 -->
-              <dv-border-box-12 :color="borderColor" class="page-two-box-1">
-                <div class="vertical-line">{{
-                  $t('ProcessLineDashboard.center.title3')
-                }}</div>
-                <dv-scroll-board
-                  :config="qualityManagement"
-                  style="width: 100%; height: 380px"
-                  class="quality-info"
-                />
-              </dv-border-box-12>
-              <!-- 品质异常 -->
-              <dv-border-box-12 :color="borderColor" class="page-two-box-2">
-                <div class="vertical-line">{{
-                  $t('ProcessLineDashboard.center.title4')
-                }}</div>
-                <dv-scroll-board
-                  :config="abnormalQuality"
-                  class="quality-info2"
-                  style="width: 100%; height: 380px"
-                />
-              </dv-border-box-12>
-            </a-col>
-            <!-- 左边 -->
-            <a-col :span="8" style="padding-left: 10px">
-              <!-- 鞋型日产量 -->
-              <dv-border-box-12 :color="borderColor" class="page-two-box-3">
-                <div class="vertical-line">{{
-                  $t('ProcessLineDashboard.left.title3')
-                }}</div>
-                <!-- <VCharts
-                  :option="shoeTypeOption"
-                  autoresize
-                  style="width: 100%; height: 390px"
-                ></VCharts> -->
-                <dv-scroll-ranking-board
-                  :config="shoeTypeOption"
-                  class="shoe-type"
-                  style="width: 100%; height: 390px"
-                />
-              </dv-border-box-12>
-              <!-- 设备管理 -->
-              <dv-border-box-12 :color="borderColor" class="page-two-box-4">
-                <div class="vertical-line">{{
-                  $t('ProcessLineDashboard.right.title2')
-                }}</div>
-                <VCharts
-                  :option="deviceOption"
-                  autoresize
-                  style="width: 100%; height: 390px"
-                ></VCharts>
-              </dv-border-box-12>
-            </a-col>
-          </a-row>
-        </template>
+                </dv-border-box-12>
+              </div>
+              <div style="padding-bottom: 12px; flex: 1">
+                <dv-border-box-12 :color="['#2E6099', '#0EE4F9']">
+                  <div class="flex-row padding-15" style="padding-right: 0">
+                    <div style="width: 70%">
+                      <div class="vertical-line">{{
+                        $t('ProcessLineDashboard.center.title5')
+                      }}</div>
+                      <dv-scroll-board
+                        :config="questionTracking"
+                        style="width: 100%; height: 208px"
+                        class="tracking-info"
+                      />
+                    </div>
+                    <div style="width: 30%">
+                      <VCharts
+                        :option="incompleteOption"
+                        autoresize
+                        style="width: 100%; height: 240px"
+                      ></VCharts>
+                    </div>
+                  </div>
+                </dv-border-box-12>
+              </div>
+            </div>
+          </a-col>
+          <!-- 右边 -->
+          <a-col
+            class="max-height"
+            :span="6"
+            style="padding-left: 0 !important; padding-right: 0 !important"
+          >
+            <div class="max-height flex-column">
+              <div class="flex-1" style="padding-bottom: 12px">
+                <dv-border-box-12 :color="['#2E6099', '#0EE4F9']">
+                  <div class="max-height max-width padding-15">
+                    <div class="vertical-line">{{
+                      $t('ProcessLineDashboard.right.title1')
+                    }}</div>
+                    <dv-scroll-board
+                      :config="groupMembers"
+                      style="width: 100%; height: 300px"
+                    />
+                  </div>
+                </dv-border-box-12>
+              </div>
+              <div class="flex-1" style="padding-bottom: 12px">
+                <dv-border-box-12 :color="['#2E6099', '#0EE4F9']">
+                  <div class="max-height max-width padding-15">
+                    <div class="vertical-line">{{
+                      $t('ProcessLineDashboard.right.title2')
+                    }}</div>
+                    <VCharts
+                      :option="deviceOption"
+                      autoresize
+                      style="width: 100%; height: 240px"
+                    ></VCharts>
+                  </div>
+                </dv-border-box-12>
+              </div>
+              <div class="flex-1" style="padding-bottom: 12px">
+                <dv-border-box-12 :color="['#2E6099', '#0EE4F9']">
+                  <div class="max-height max-width padding-15">
+                    <!-- <div class="vertical-line">{{
+                      $t('ProcessLineDashboard.right.title3')
+                    }}</div>
+                    <dv-scroll-board
+                      :config="bottomMatching"
+                      style="width: 100%; height: 120px"
+                    />
+                    <div class="vertical-line">{{
+                      $t('ProcessLineDashboard.right.title4')
+                    }}</div>
+                    <dv-scroll-board
+                      :config="orderInfo"
+                      style="width: 100%; height: 120px"
+                      class="order-info"
+                    /> -->
+                  </div>
+                </dv-border-box-12>
+              </div>
+            </div>
+          </a-col>
+        </a-row>
       </div>
     </VScaleScreen>
   </dv-full-screen-container>
@@ -266,18 +329,27 @@
     getQualityManagement,
   } from '@/api/ProcessLineDashboard';
 
-  // 顶部-标题
-  const pageTitle = ref<any>('加工线生产看板');
   // 左边-部门领导信息
   const leaderInfo = ref<any>({});
   // 左边-产量信息
   const productionInfo = ref<any>({});
   const productionAchievementRateColor = ref<any>('#FD2104');
   const dayRFTColor = ref<any>('#FD2104');
+  // 左边-月达成率
+  const monthAchievementRateOption = ref<any>({});
+  // 左边-当日达成率
+  const dayAchievementRateOption = ref<any>({});
   // 左边-PPH
   const dayAndMonthPPHOption = ref<any>({ monthPPH: 0, dayPPH: 0 });
   // 左边-鞋型日产量
   const shoeTypeOption = ref<any>({});
+  const shoeTypePageSize = 5;
+  let shoeTypeSum: any = [];
+  let shoeTypePercent: any = [];
+  let shoeTypeName: any = [];
+  let shoeTypeValue: any = [];
+  let shoeTypeData: any = [];
+  let shoeTypePageIndex = 1;
   // 中间-生产组别
   const productionGroupOptions = ref<any>([]);
   const productionGroup = ref<any>('');
@@ -298,26 +370,23 @@
   let deviceColor: any = [];
   // 右边-组别人员
   const groupMembers = ref<any>({});
+  // 右边-面底配套
+  const bottomMatching = ref<any>({});
+  // 右边-当日未配套订单信息
+  const orderInfo = ref<any>({});
   // 刷新数据定时器
+  let shoeTypePartTimer: any = 0;
   let kanbanTimer: any = 0;
-  let pageTimer: any = 0;
-  // 刷新频率 5分钟
-  const kanbanInterval = 5 * 60 * 1000;
-  // 切换页面 2分钟
-  const pageInterval = 2 * 60 * 1000;
+  // let scrollTimer: any = 0;
+  
+  const kanbanInterval = 30 * 1000; // 30 seconds in milliseconds
   // 查询参数
   const queryParam = { departmentCode: '' };
-  // 显示第几页面
-  const showPage = ref<number>(1);
-  // 边框颜色
-  const borderColor = ref<any>(['#2E6099', '#0EE4F9']);
 
   // 公共-停止定时器
   function stopInterval() {
     clearInterval(kanbanTimer);
-    clearInterval(pageTimer);
     kanbanTimer = 0;
-    pageTimer = 0;
   }
 
   // 左边-获取生产线基本信息
@@ -338,7 +407,7 @@
       const zzPhone = leader.ZZ_PHONE === null ? '' : leader.ZZ_PHONE;
       const bzPhone = leader.BZ_PHONE === null ? '' : leader.BZ_PHONE;
       const flPhone = leader.FL_PHONE === null ? '' : leader.FL_PHONE;
-      leaderInfo.value.zz = `${zzName} ${zzPhone}`;
+      leaderInfo.value.zz = zzName && zzPhone ? `${zzName} ${zzPhone}` : "No data";
       leaderInfo.value.bz = `${bzName} ${bzPhone}`;
       leaderInfo.value.fl = `${flName} ${flPhone}`;
     }
@@ -372,7 +441,113 @@
     }
   };
 
-  // 左边-获取PPH
+  // 左边-获取IE达成率
+  monthAchievementRateOption.value = reactive({
+    color: ['#0BC0C4', '#E9E9E9'],
+    title: [
+      {
+        text: '',
+        top: '38%',
+        textAlign: 'center',
+        left: '50%',
+        textStyle: {
+          color: '#FFFFFF',
+          fontSize: 28,
+        },
+      },
+      {
+        text: '月达成率',
+        top: '53%',
+        textAlign: 'center',
+        left: '50%',
+        textStyle: {
+          color: '#FFFFFF',
+          fontSize: 18,
+        },
+      },
+    ],
+    series: [
+      {
+        type: 'pie',
+        radius: ['65%', '85%'],
+        center: ['50%', '50%'],
+        label: {
+          show: false,
+          position: 'center',
+        },
+        labelLine: {
+          show: false,
+        },
+        selectedMode: 'single',
+        selectedOffset: 5,
+        data: [],
+      },
+    ],
+  });
+
+  dayAchievementRateOption.value = reactive({
+    color: ['#CC6600', '#E9E9E9'],
+    title: [
+      {
+        text: '',
+        top: '38%',
+        textAlign: 'center',
+        left: '50%',
+        textStyle: {
+          color: '#FFFFFF',
+          fontSize: 28,
+        },
+      },
+      {
+        text: '当日达成率',
+        top: '53%',
+        textAlign: 'center',
+        left: '50%',
+        textStyle: {
+          color: '#FFFFFF',
+          fontSize: 18,
+        },
+      },
+    ],
+    series: [
+      {
+        type: 'pie',
+        radius: ['65%', '85%'],
+        center: ['50%', '50%'],
+        label: {
+          show: false,
+          position: 'center',
+        },
+        labelLine: {
+          show: false,
+        },
+        selectedMode: 'single',
+        selectedOffset: 5,
+        data: [],
+      },
+    ],
+  });
+
+  const getIEAchievementRate = async () => {
+    monthAchievementRateOption.value.title[0].text = '';
+    monthAchievementRateOption.value.series[0].data = [];
+    dayAchievementRateOption.value.title[0].text = '';
+    dayAchievementRateOption.value.series[0].data = [];
+    const result = await getCompletionRate(queryParam);
+    if (result.data) {
+      const monthData: any = [];
+      const dayData: any = [];
+      monthData.push({ name: '已完成', value: result.data.monthlyRate });
+      monthData.push({ name: '未完成', value: 100 - result.data.monthlyRate });
+      monthAchievementRateOption.value.title[0].text = `${result.data.monthlyRate}%`;
+      monthAchievementRateOption.value.series[0].data = monthData;
+      dayData.push({ name: '已完成', value: result.data.dailyRate });
+      dayData.push({ name: '未完成', value: 100 - result.data.dailyRate });
+      dayAchievementRateOption.value.title[0].text = `${result.data.dailyRate}%`;
+      dayAchievementRateOption.value.series[0].data = dayData;
+    }
+  };
+
   const getDayAndMonthPPH = async () => {
     const result = await getPPH(queryParam);
     // console.log(result);
@@ -385,28 +560,152 @@
   // 左边-获取鞋型日产量
   // 左边-鞋型日产量图形初始化
   shoeTypeOption.value = reactive({
-    data: [],
-    rowNum: [4],
-    waitTime: 5000,
-    fontSize: 28,
-    color: '#0272FC',
-    unit: 'pair',
+    grid: {
+      top: '2%',
+      bottom: '2%',
+      right: '11%',
+      left: '0',
+      containLabel: true,
+    },
+    xAxis: {
+      type: 'value',
+      axisLabel: {
+        show: false,
+      },
+      axisLine: {
+        show: false,
+      },
+      axisTick: {
+        show: false,
+      },
+      splitLine: {
+        show: false,
+      },
+    },
+    yAxis: {
+      type: 'category',
+      data: [],
+      axisLine: {
+        show: false,
+      },
+      axisTick: {
+        show: false,
+      },
+      axisLabel: {
+        color: '#ffffff',
+        fontSize: 15,
+      },
+      splitLine: {
+        lineStyle: {
+          color: '#353A46',
+        },
+      },
+    },
+    series: [
+      {
+        data: [],
+        type: 'bar',
+        emphasis: {
+          focus: 'series',
+        },
+        barWidth: '35%',
+        barGap: '-100%',
+        silent: true,
+        itemStyle: {
+          normal: {
+            color: 'rgb(38,57,73)',
+            barBorderRadius: 20,
+          },
+        },
+        label: {
+          show: true,
+          position: 'right',
+          color: '#ffffff',
+          fontSize: 15,
+          formatter: (a: any) => {
+            return `${shoeTypePercent[a.dataIndex]}%`;
+          },
+        },
+      },
+      {
+        data: [],
+        type: 'bar',
+        barWidth: '35%',
+        emphasis: {
+          disabled: true,
+          focus: 'none',
+        },
+        itemStyle: {
+          normal: {
+            color: 'rgb(2,114,252)',
+            barBorderRadius: 20,
+          },
+        },
+        label: {
+          show: true,
+          fontSize: 15,
+          color: '#ffffff',
+          position: 'inside',
+        },
+      },
+    ],
   });
 
+  // 左边-清空鞋型日产量数据
+  function clearShoeData() {
+    shoeTypeName = [];
+    shoeTypeSum = [];
+    shoeTypeValue = [];
+    shoeTypePercent = [];
+  }
+
+  // 左边-获取某页鞋型数据
+  function getShoePartData() {
+    clearShoeData();
+    const maxPage =
+      shoeTypeData.length % shoeTypePageSize === 0
+        ? shoeTypeData.length / shoeTypePageSize
+        : shoeTypeData.length / shoeTypePageSize + 1;
+    if (shoeTypePageIndex > maxPage) {
+      shoeTypePageIndex = 1;
+    }
+    const len = shoeTypePageIndex * shoeTypePageSize;
+    const start = (shoeTypePageIndex - 1) * shoeTypePageSize;
+    const end = len > shoeTypeData.length ? shoeTypeData.length : len;
+    const data: any = [];
+    for (let i = start; i < end; i += 1) {
+      data.push(shoeTypeData[i]);
+    }
+    data.reverse();
+    data.forEach((item: any) => {
+      shoeTypeName.push(item.NAME_T);
+      shoeTypeValue.push(item.LABEL_QTY);
+      shoeTypePercent.push(item.RATE);
+      shoeTypeSum.push(item.TOTAL);
+    });
+    shoeTypeOption.value.yAxis.data = shoeTypeName;
+    shoeTypeOption.value.series[0].data = shoeTypeSum;
+    shoeTypeOption.value.series[1].data = shoeTypeValue;
+    shoeTypePageIndex += 1;
+  }
+
+  // 左边-获取鞋型数据
   const getShoeTypeProduction = async () => {
-    shoeTypeOption.value.data = [];
-    const datas: any = [];
+    clearInterval(shoeTypePartTimer);
+    clearShoeData();
+    shoeTypePageIndex = 1;
+    shoeTypeData = [];
     const result = await getShoesModelYield(queryParam);
     // console.log(result);
     if (result.data && result.data.length > 0) {
-      result.data.forEach((item: any) => {
-        datas.push({
-          name: item.NAME_T,
-          value: item.LABEL_QTY,
-        });
-      });
+      shoeTypeData = result.data;
     }
-    shoeTypeOption.value.data = datas;
+    getShoePartData();
+    if (shoeTypeData.length > shoeTypePageSize) {
+      shoeTypePartTimer = setInterval(() => {
+        getShoePartData();
+      }, 3000);
+    }
   };
 
   // 中间-生产组别
@@ -419,24 +718,19 @@
     }
     // console.log(userDept);
     const result = await LoadDeptGroup();
-    const options: any = [];
     if (result.data) {
-      let title = '';
+      let groupVal = '';
       result.data.forEach((item: any) => {
-        options.push({
+        if (!groupVal) {
+          groupVal = item.DEPARTMENT_CODE;
+        }
+        productionGroupOptions.value.push({
           value: item.DEPARTMENT_CODE,
           name: item.DEPARTMENT_NAME,
         });
-        if (userDept.data === item.DEPARTMENT_CODE) {
-          title = item.DEPARTMENT_NAME;
-        }
       });
-      productionGroupOptions.value = options;
       productionGroup.value = userDept.data;
       queryParam.departmentCode = userDept.data;
-      if (title) {
-        pageTitle.value = `${title}`; // 看板
-      }
       loadData();
     }
   };
@@ -447,16 +741,16 @@
       'Time',
       'Target',
       'Actual',
-      'TQC Defect',
+      'Defect',
       'Product %',
-      'RFT %',
+      'RFT%',
       'Working hour',
       'PPH',
       'Line time',
     ],
     data: [],
     index: false,
-    columnWidth: [220, 130, 130, 190, 160, 160, 220, 130, 160],
+    columnWidth: [109, 100, 95, 100, 105, 95, 150, 95, 90],
     align: [
       'center',
       'center',
@@ -469,11 +763,10 @@
       'center',
     ],
     rowNum: [10],
-    indexHeader: ['No.'],
+    indexHeader: ['序号'],
     waitTime: 3000000000,
     hoverPause: false,
     headerBGC: '#0C244D',
-    headerHeight: 45,
   });
 
   const getHourProductionRate = async () => {
@@ -484,8 +777,7 @@
       result.data.forEach((item: any) => {
         const targetOutput = `<span style="color:#fe7007">${item.target_output}</span>`;
         const actualOutput = `<span style="color:#0AF60A">${item.actual_output}</span>`;
-        const doneColor =
-          item.completion_percentage >= 100 ? '#0AF60A' : '#FD2104';
+        const doneColor = item.completion_percentage >= 100 ? '#0AF60A' : '#FD2104';
         const doneRate = `<span style="color:${doneColor}">${item.completion_percentage}</span>`;
         const rftColor = item.rft >= 100 ? '#0AF60A' : '#FD2104';
         const rft = `<span style="color:${rftColor}">${item.rft}</span>`;
@@ -503,33 +795,35 @@
       });
     }
     productionRate.value.data = data;
+
+    // console.log(data);
+    
   };
 
   // 中间-获取品质管理-当日前五大不良原因
   qualityManagement.value = reactive({
-    header: ['Inspection items', 'No. defect', 'Defect rate'],
+    header: ['Inspection item', 'Defect No.', 'Defect rate'],
     data: [],
     index: false,
-    columnWidth: [770, 230, 230],
+    columnWidth: [244, 100, 105],
     align: ['center', 'center', 'center'],
     rowNum: [5],
-    indexHeader: ['No.'],
+    indexHeader: ['序号'],
     waitTime: 3000,
     hoverPause: false,
     headerBGC: '#0C244D',
-    headerHeight: 50,
   });
 
   // 中间-获取品质异常
   abnormalQuality.value = reactive({
     header: [
       'Month',
-      '<div style="line-height: 1.2;"><div>Internal</div><div>Batch</div></div>',
-      '<div style="line-height: 1.2;"><div>Internal</div><div>Abnormal</div></div>',
-      '<div style="line-height: 1.2;"><div>Internal</div><div>Major</div></div>',
-      '<div style="color:#32C5E9;line-height: 1.2;"><div>External</div><div>Batch</div></div>',
-      '<div style="color:#32C5E9;line-height: 1.2;"><div>External</div><div>Abnormal</div></div>',
-      '<div style="color:#32C5E9;line-height: 1.2;"><div>External</div><div>Major</div></div>',
+      '<div><div>Internal</div><div>Batch</div></div>',
+      '<div><div>Internal</div><div>Abnormal</div></div>',
+      '<div><div>Internal</div><div>Major</div></div>',
+      '<div style="color:#32C5E9"><div>External</div><div>Batch</div></div>',
+      '<div style="color:#32C5E9"><div>External</div><div>Abnormal</div></div>',
+      '<div style="color:#32C5E9"><div>External</div><div>Major</div></div>',
     ],
     data: [],
     index: false,
@@ -544,11 +838,11 @@
       'center',
     ],
     rowNum: [5],
-    indexHeader: ['No.'],
+    indexHeader: ['序号'],
     waitTime: 3000,
     hoverPause: false,
     headerBGC: '#0C244D',
-    headerHeight: 75,
+    headerHeight: 40,
   });
 
   const getQualityManagements = async () => {
@@ -611,13 +905,13 @@
 
   // 中间-获取问题追踪
   questionTracking.value = reactive({
-    header: ['Question No.', 'Question item', 'Responsible unit', 'Person charge', 'Issue date'],
+    header: ['Question No.', 'Question item', 'Responsible', 'Person charge', 'Issue report date'],
     data: [],
     index: false,
-    columnWidth: [125, 190, 100, 90, 130],
+    columnWidth: [125, 150, 100, 115, 130],
     align: ['center', 'center', 'center', 'center', 'center'],
     rowNum: [5],
-    indexHeader: ['No.'],
+    indexHeader: ['序号'],
     waitTime: 3000,
     hoverPause: false,
     headerBGC: '#0C244D',
@@ -638,7 +932,7 @@
         },
       },
       {
-        text: 'In complete',
+        text: 'Incomplete',
         top: '53%',
         textAlign: 'center',
         left: '50%',
@@ -669,9 +963,9 @@
 
   function getIncompleteData(dayRate: any) {
     const data: any = [];
-    data.push({ name: 'Completed', value: dayRate });
-    data.push({ name: 'Close', value: 100 - dayRate });
-    incompleteOption.value.title[0].text = `${dayRate} %`;
+    data.push({ name: '已完成', value: dayRate });
+    data.push({ name: '未完成', value: 100 - dayRate });
+    incompleteOption.value.title[0].text = `${dayRate}%`;
     incompleteOption.value.series[0].data = data;
   }
 
@@ -705,7 +999,6 @@
     radius: '85%',
     activeRadius: '90%',
     showOriginValue: true,
-    digitalFlopStyle: { fontSize: 32 },
     data: [],
   });
 
@@ -719,19 +1012,12 @@
       const waterSpider = result.data.water_spider;
       if (skillWorkers >= 0 && jockeyWorks >= 0 && waterSpider >= 0) {
         const data: any = [];
-        data.push({ name: 'Skill Worker', value: result.data.skill_workers });
-        data.push({ name: 'Operator', value: result.data.jockey_works });
-        data.push({ name: 'Material No.', value: result.data.water_spider });
+        data.push({ name: 'Skill Worker : ', value: result.data.skill_workers });
+        data.push({ name: 'Worker : ', value: result.data.jockey_works });
+        data.push({ name: 'Material : ', value: result.data.water_spider }); // 水蜘蛛
         groupMembers.value.data = data;
-
-        console.log(data);
       }
-      else {
-        console.log("Data not found");
-      }
-      
     }
-    // console.log('Data Group Member: ',result.data);
   };
 
   // 右边-获取设备管理
@@ -739,7 +1025,7 @@
     grid: {
       top: '2%',
       bottom: '2%',
-      right: '13%',
+      right: '11%',
       left: '0',
       containLabel: true,
     },
@@ -769,7 +1055,7 @@
       },
       axisLabel: {
         color: '#ffffff',
-        fontSize: 36,
+        fontSize: 15,
       },
       splitLine: {
         lineStyle: {
@@ -784,7 +1070,7 @@
         emphasis: {
           focus: 'series',
         },
-        barWidth: '60%',
+        barWidth: '45%',
         barGap: '-100%',
         silent: true,
         itemStyle: {
@@ -796,7 +1082,7 @@
         label: {
           show: true,
           position: 'right',
-          fontSize: 36,
+          fontSize: 15,
           color: '#ffffff',
           formatter: (a: any) => {
             return `${devicePercent[a.dataIndex]}%`;
@@ -806,7 +1092,7 @@
       {
         data: [],
         type: 'bar',
-        barWidth: '60%',
+        barWidth: '45%',
         emphasis: {
           disabled: true,
           focus: 'none',
@@ -821,7 +1107,7 @@
         },
         label: {
           show: true,
-          fontSize: 36,
+          fontSize: 15,
           color: '#ffffff',
           position: 'inside',
         },
@@ -850,18 +1136,18 @@
         deviceSum.push(item.TOTAL);
         devicePercent.push(item.RATE);
         switch (item.DEVICE_NAME) {
-          case 'In use':
-          case 'Borrow':
+          case '使用中':
+          case '借出':
             deviceColor.push('#0272FC');
             break;
-          case 'Maintenance':
-          case 'Waiting repair':
+          case '维修中':
+          case '待维修':
             deviceColor.push('#EC808D');
             break;
-          case 'Idle':
+          case '闲置':
             deviceColor.push('#7F7F7F');
             break;
-          case 'Reject':
+          case '报废':
             deviceColor.push('#B50B24');
             break;
           default:
@@ -874,6 +1160,67 @@
       deviceOption.value.series[1].data = deviceValue;
     }
   };
+  // 右边-获取面底配套
+  bottomMatching.value = reactive({
+    header: ['日期', '面库存', '底库存', '面底配套数'],
+    data: [],
+    index: false,
+    columnWidth: [100, 100, 100, 140],
+    align: ['center', 'center', 'center', 'center'],
+    rowNum: [3],
+    indexHeader: ['序号'],
+    waitTime: 3000,
+    hoverPause: false,
+    headerBGC: '#0C244D',
+  });
+
+  const getBottomMatching = async () => {
+    const data = [
+      ['7/21', '1238', '856', '856'],
+      ['7/22', '1892', '1782', '1782'],
+      ['7/23', '2172', '3281', '2172'],
+      ['7/24', '1123', '1025', '1025'],
+      ['7/25', '1420', '1130', '1420'],
+      ['7/26', '1820', '1314', '1314'],
+      ['7/27', '1545', '775', '1145'],
+      ['7/24', '1123', '1025', '1025'],
+      ['7/25', '1420', '1130', '1420'],
+      ['7/26', '1820', '1314', '1314'],
+      ['7/27', '1545', '775', '1145'],
+    ];
+    bottomMatching.value.data = data;
+  };
+
+  // 右边-获取当日未配套订单信息
+  orderInfo.value = reactive({
+    header: ['PO', '尺码', '计划数', '未配套数', '鞋面欠数', '本底欠数'],
+    data: [],
+    index: false,
+    columnWidth: [90, 80, 80, 80, 80, 80],
+    align: ['center', 'center', 'center', 'center', 'center', 'center'],
+    rowNum: [2],
+    indexHeader: ['序号'],
+    waitTime: 3000,
+    hoverPause: false,
+    headerBGC: '#0C244D',
+  });
+
+  const getOrderInfo = async () => {
+    const data = [
+      ['013503947', '1238', '856', '856', '856', '856'],
+      ['013503948', '1892', '1782', '1782', '856', '856'],
+      ['013503949', '2172', '3281', '2172', '856', '856'],
+      ['013503950', '1123', '1025', '1025', '856', '856'],
+      ['013503951', '1420', '1130', '1420', '856', '856'],
+      ['013503952', '1820', '1314', '1314', '856', '856'],
+      ['013503953', '1545', '775', '1145', '856', '856'],
+      ['013503954', '1123', '1025', '1025', '856', '856'],
+      ['013503955', '1420', '1130', '1420', '856', '856'],
+      ['013503956', '1820', '1314', '1314', '856', '856'],
+      ['013503957', '1545', '775', '1145', '856', '856'],
+    ];
+    orderInfo.value.data = data;
+  };
 
   // 加载数据
   function loadData() {
@@ -883,32 +1230,30 @@
     getShoeTypeProduction();
     getHourProductionRate();
     getQualityManagements();
-    // getQuestionTracking();
+    getQuestionTracking();
     getGroupMemberInfo();
     getDevices();
+    // getBottomMatching();
+    // getOrderInfo();
     kanbanTimer = setInterval(() => {
+      // getLeaderInfo();
       getProductionInfo();
       getDayAndMonthPPH();
       getShoeTypeProduction();
       getHourProductionRate();
       getQualityManagements();
-      // getQuestionTracking();
+      getQuestionTracking();
       getGroupMemberInfo();
       getDevices();
+      // getBottomMatching();
+      // getOrderInfo();
     }, kanbanInterval);
-    pageTimer = setInterval(() => {
-      showPage.value = showPage.value === 1 ? 2 : 1;
-    }, pageInterval);
   }
 
   // 组件事件
   // 中间-生产组别选择事件
   function handleChangeProGroup(val: any) {
     queryParam.departmentCode = productionGroup.value;
-    const obj = productionGroupOptions.value.find((item: any) => {
-      return item.value === productionGroup.value;
-    });
-    pageTitle.value = `${obj.name}`;
     stopInterval();
     loadData();
   }
@@ -929,47 +1274,40 @@
   }
 
   .container {
+    margin: 5px 20px;
     position: fixed;
-    top: 125px;
-    width: 1920px;
-    height: 985px;
-    background-color: black;
-    padding-left: 11px;
-    padding-right: 15px;
+    top: 85px;
+    width: calc(100% - 40px);
+    height: calc(100% - 90px);
   }
 
-  .container-row {
-    height: 985px;
-    padding: 0 !important;
-    margin: 0 !important;
+  .max-height {
+    height: 100%;
   }
 
-  :deep(.header-center-decoration) {
-    margin-top: 36px !important;
+  .max-width {
+    width: 100%;
   }
 
-  :deep(.header-left-decoration) {
-    margin-top: 15px !important;
-  }
-
-  :deep(.header-right-decoration) {
-    margin-top: 15px !important;
-  }
-
-  :deep(.hd-right-time) {
-    font-size: 30px !important;
+  .flex-column {
+    display: flex;
+    flex-direction: column;
   }
 
   .flex-1 {
     flex: 1;
   }
 
+  .flex-2 {
+    flex: 2;
+  }
+
   .vertical-line {
     position: relative;
     padding-left: 12px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     color: #0ee4f9;
-    font-size: 32px;
+    font-size: 20px;
     font-weight: bold;
   }
 
@@ -988,121 +1326,18 @@
     padding: 15px;
   }
 
-  .padding-leftright-0 {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
+  .flex-row {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
   }
 
-  .page-one-box-1 {
-    margin-bottom: 15px;
-    width: 476px;
-    height: 208px;
-    padding: 15px;
-  }
-
-  .page-one-box-2 {
-    margin-bottom: 15px;
-    width: 476px;
-    height: 335px;
-    padding: 15px;
-    :deep(.dv-digital-flop) {
-      height: 60px !important;
-    }
-
-    :deep(.active-ring-name) {
-      height: 36px !important;
-    }
-  }
-
-  .page-one-box-3 {
-    margin-bottom: 15px;
-    width: 476px;
-    height: 370px;
-    padding: 15px;
-    .box-content {
-      height: 285px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .box-title {
-      color: #0bf8fe;
-      font-size: 36px;
-      text-align: center;
-      margin-bottom: 18px;
-    }
-
-    .border-1 {
-      width: 200px;
-      height: 200px;
-      background: url(@/assets/images/circle1.png) no-repeat;
-      background-size: 100% 100%;
-    }
-  }
-
-  .page-one-box-4 {
-    margin-bottom: 15px;
-    width: 1408px;
-    height: 208px;
-    padding: 15px;
-  }
-
-  .page-one-box-5 {
-    margin-bottom: 15px;
-    width: 1408px;
-    height: 720px;
-    padding: 15px;
-  }
-
-  .page-two-box-1 {
-    margin-bottom: 15px;
-    width: 1263px;
-    height: 465px;
-    padding: 15px;
-  }
-
-  .page-two-box-2 {
-    margin-bottom: 15px;
-    width: 1263px;
-    height: 465px;
-    padding: 15px;
-  }
-
-  .page-two-box-3 {
-    margin-bottom: 15px;
-    width: 626px;
-    height: 465px;
-    padding: 15px;
-  }
-
-  .page-two-box-4 {
-    margin-bottom: 15px;
-    width: 626px;
-    height: 465px;
-    padding: 15px;
-  }
-
-  .shoe-type {
-    :deep(.rank) {
-      display: none;
-    }
-    :deep(.inside-column) {
-      border-radius: 5px !important;
-      margin-bottom: 0 !important;
-      height: 22px !important;
-    }
-
-    :deep(.ranking-column) {
-      border-bottom: 0;
-      border-radius: 5px;
-      background-color: #263949;
-    }
-
-    :deep(.info-name) {
-      overflow: hidden !important;
-      text-overflow: ellipsis !important;
-      white-space: nowrap !important;
-    }
+  .border-1 {
+    width: 200px;
+    height: 200px;
+    background: url(@/assets/images/circle1.png) no-repeat;
+    background-size: 100% 100%;
   }
 
   .flex-row {
@@ -1136,73 +1371,53 @@
 
   .selector-title {
     color: white;
-    font-size: 30px;
-    display: flex;
-    :deep(.arco-select-view-value) {
-      font-size: 20px !important;
-    }
+    font-size: 18px;
+    padding-left: 5px;
   }
 
   .person-box {
     display: flex;
     flex-direction: row;
-    width: auto;
+    width: 100%;
     color: white;
     text-align: center;
-    height: auto;
-    line-height: 63px;
-    font-size: 40px;
+    height: 45px;
+    line-height: 45px;
 
     div {
       flex: 1;
       background-color: #0c244d;
-      font-size: 50%;
     }
   }
 
   .production-box {
     display: flex;
     flex-direction: row;
-    width: 97.5%;
+    width: 100%;
     color: white;
-    margin-top: 10px;
-    padding-left: 6px;
-    padding-right: 6px;
+    margin-top: 15px;
     .sub {
       flex: 1;
       text-align: center;
-      background: #0d2742;
-      margin-right: 15px;
+      background-color: #0d2742;
+      margin-right: 20px;
       overflow: hidden;
       position: relative;
       border: 1px solid #0e94eb;
-      height: 160px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
   }
 
   .production-info {
-    line-height: 1.5;
+    line-height: 2;
     :deep(.arco-statistic-title) {
       color: #0efff8;
-      font-size: 38px;
+      font-size: 18px;
       margin-top: 5px;
       margin-bottom: 0;
     }
 
     :deep(.arco-statistic-value) {
       font-weight: bold;
-    }
-
-    :deep(.arco-statistic-value-integer),
-    :deep(.arco-statistic-value-decimal) {
-      font-size: 58px;
-    }
-
-    :deep(.arco-statistic-suffix) {
-      font-size: 38px;
     }
   }
 
@@ -1222,7 +1437,7 @@
 
     :deep(.arco-statistic-value-integer),
     :deep(.arco-statistic-value-decimal) {
-      font-size: 48px;
+      font-size: 32px;
     }
   }
 
@@ -1241,21 +1456,11 @@
     transform: rotate(45deg);
   }
 
-  .production-rate {
-    :deep(.header-item) {
-      padding: 0 2px;
-      font-size: 28px;
-    }
-    :deep(.ceil) {
-      padding: 0 2px;
-      font-size: 34px;
-    }
-  }
-
   .quality-info {
     :deep(.header-item) {
       padding: 0 2px;
-      font-size: 28px;
+      font-size: 14px;
+      line-height: 15px !important;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1263,14 +1468,15 @@
 
     :deep(.ceil) {
       padding: 0 2px;
-      font-size: 34px;
+      font-size: 14px;
     }
   }
 
   .quality-info2 {
     :deep(.header-item) {
       padding: 0 2px;
-      font-size: 28px;
+      font-size: 14px;
+      line-height: 15px !important;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1278,7 +1484,7 @@
 
     :deep(.ceil) {
       padding: 0 2px;
-      font-size: 33px;
+      font-size: 16px;
     }
   }
 

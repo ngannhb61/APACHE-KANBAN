@@ -28,7 +28,7 @@ const DASHBOARD: AppRouteRecordRaw = {
       component: () => import('@/views/dashboard/ProcessLineDashboard/index.vue'),
       meta: {
         locale: 'menu.dashboard.ProcessLineDashboard',
-        requiresAuth: true,
+        requiresAuth: false,
         roles: ['*'],
       },
     },

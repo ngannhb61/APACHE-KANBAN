@@ -213,7 +213,7 @@
   import { ref, onMounted } from 'vue';
   import useChartOption from '@/hooks/chart-option';
   import useLoading from '@/hooks/loading';
-  import moment from 'moment';
+  // import moment from 'moment';
   import {
     Getorg,
     GetMaintenanceList,
@@ -346,12 +346,12 @@
         starttime: '',
         endtime: '',
       };
-      obj.starttime = moment(
-        moment().week(moment().week()).startOf('week').add(1, 'days').valueOf()
-      ).format('YYYY-MM-DD');
-      obj.endtime = moment(
-        moment().week(moment().week()).endOf('week').add(1, 'days').valueOf()
-      ).format('YYYY-MM-DD');
+      // obj.starttime = moment(
+      //   moment().week(moment().week()).startOf('week').add(1, 'days').valueOf()
+      // ).format('YYYY-MM-DD');
+      // obj.endtime = moment(
+      //   moment().week(moment().week()).endOf('week').add(1, 'days').valueOf()
+      // ).format('YYYY-MM-DD');
       range.value.push(obj.starttime);
       range.value.push(obj.endtime);
       formModel.value.selectdate = range.value;

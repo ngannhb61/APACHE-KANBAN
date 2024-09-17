@@ -26,7 +26,7 @@ export interface PolicyListRes {
   total: number;
 }
 export function queryPolicyList1(params: PolicyParams) {
-  console.log('ddd   queryPolicyList1' );
+  // console.log('ddd   queryPolicyList1' );
   return axios.get<PolicyListRes>('/api/list/policy1', {
     params,
     paramsSerializer: (obj) => {
@@ -36,7 +36,7 @@ export function queryPolicyList1(params: PolicyParams) {
 }
 
 export function queryPolicyList(params: PolicyParams) {
-  console.log('ddd   queryPolicyList' );
+  // console.log('ddd   queryPolicyList' );
   return axios.get<PolicyListRes>('/api/list/policy', {
     params,
     paramsSerializer: (obj) => {

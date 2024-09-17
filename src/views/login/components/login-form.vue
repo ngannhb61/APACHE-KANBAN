@@ -3,7 +3,7 @@
     <!-- Chọn ngôn ngữ -->
     <div class="language-select">
       <h2 style="font-family: 'Times New Roman', Times, serif;">{{$t('login.form.language')}}</h2>
-    <select class="select-language" v-model="selectedLanguage" @change="handleChangeLanguage">
+    <select v-model="selectedLanguage" class="select-language" @change="handleChangeLanguage">
       <option v-for="lang in supportedLanguages" :key="lang.code" :value="lang.code">
         {{ lang.name }}
       </option>

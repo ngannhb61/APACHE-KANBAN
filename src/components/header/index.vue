@@ -98,7 +98,7 @@
         <template v-else>{{ rightTitle }}</template>
       </div>
       <div class="hd-right-full">
-        <a-link @click="toggleFullScreen" class="fullscreen-link">
+        <a-link class="fullscreen-link" @click="toggleFullScreen">
           <img
             src="@/assets/images/white-full-screen.png"
             class="fullscreen-img"
@@ -213,7 +213,7 @@
   }
 
   function toHome() {
-    console.log('跳转主页面');
+    // console.log('跳转主页面');
     exitFullScreen();
     // window.location.href = '/#/homePage/workplace';
     router.push({

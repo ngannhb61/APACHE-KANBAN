@@ -210,7 +210,7 @@
   }
 
   function toHome() {
-    console.log('跳转主页面');
+    // console.log('跳转主页面');
     exitFullScreen();
     // window.location.href = '/#/homePage/workplace';
     router.push({

@@ -87,7 +87,7 @@ export async function GetMaintenanceList(param: any) {
     }
   );
   if (!data.IsSuccess) {
-    console.log(data.ErrMsg);
+    // console.log(data.ErrMsg);
     throw new Error(`${data.ErrMsg}(GetMaintenanceList)`);
   } else {
     if (data.RetData !== '') {
@@ -108,7 +108,7 @@ export async function RepairList(param: any) {
     }
   );
   if (!data.IsSuccess) {
-    console.log(data.ErrMsg);
+    // console.log(data.ErrMsg);
     throw new Error(`${data.ErrMsg}(GetRepairList)`);
   } else {
     if (data.RetData !== '') {
@@ -129,7 +129,7 @@ export async function DevicestatusRate(param: any) {
     }
   );
   if (!data.IsSuccess) {
-    console.log(data.ErrMsg);
+    // console.log(data.ErrMsg);
     throw new Error(`${data.ErrMsg}(DevicestatusRate)`);
   } else {
     if (data.RetData !== '') {
@@ -151,7 +151,7 @@ export async function MaintenanceCompletionRate(param: any) {
     }
   );
   if (!data.IsSuccess) {
-    console.log(data.ErrMsg);
+    // console.log(data.ErrMsg);
     throw new Error(`${data.ErrMsg}(MaintenanceCompletionRate)`);
   } else {
     if (data.RetData !== '') {
@@ -174,7 +174,7 @@ export async function RepairCompletionRate(param: any) {
     }
   );
   if (!data.IsSuccess) {
-    console.log(data.ErrMsg);
+    // console.log(data.ErrMsg);
     throw new Error(`${data.ErrMsg}(RepairCompletionRate)`);
   } else {
     if (data.RetData !== '') {
@@ -198,7 +198,7 @@ export async function GetMaintenanceDetail01(param: any) {
     }
   );
   if (!data.IsSuccess) {
-    console.log(data.ErrMsg);
+    // (data.ErrMsg);
     throw new Error(`${data.ErrMsg}(GetMaintenanceDetail_01)`);
   } else {
     if (data.RetData !== '') {
@@ -222,7 +222,7 @@ export async function GetMaintenanceDetail02(param: any) {
     }
   );
   if (!data.IsSuccess) {
-    console.log(data.ErrMsg);
+    // console.log(data.ErrMsg);
     throw new Error(`${data.ErrMsg}(GetMaintenanceDetail_02)`);
   } else {
     if (data.RetData !== '') {
@@ -246,7 +246,7 @@ export async function GetRepairDetail(param: any) {
     }
   );
   if (!data.IsSuccess) {
-    console.log(data.ErrMsg);
+    // console.log(data.ErrMsg);
     throw new Error(`${data.ErrMsg}(GetRepairDetail)`);
   } else {
     if (data.RetData !== '') {
@@ -265,7 +265,7 @@ export async function GetToplist() {
     {}
   );
   if (!data.IsSuccess) {
-    console.log(data.ErrMsg);
+    // console.log(data.ErrMsg);
     throw new Error(`${data.ErrMsg}(GetToplist)`);
   } else {
     if (data.RetData !== '') {

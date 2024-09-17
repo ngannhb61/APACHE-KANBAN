@@ -19,7 +19,7 @@ export async function GetServerTime() {
   if (!data.IsSuccess) {
     result.msg = data.ErrMsg;
     // eslint-disable-next-line no-console
-    console.log(data.ErrMsg);
+    // console.log(data.ErrMsg);
   } else {
     result.data = data.RetData;
   }
@@ -39,7 +39,7 @@ export async function LoadDepartment() {
   if (!data.IsSuccess) {
     result.msg = data.ErrMsg;
     // eslint-disable-next-line no-console
-    console.log(data.ErrMsg);
+     // console.log(data.ErrMsg);
   } else {
     result.data = data.RetData;
   }
@@ -59,7 +59,7 @@ export async function LoadDeptGroup() {
   if (!data.IsSuccess) {
     result.msg = data.ErrMsg;
     // eslint-disable-next-line no-console
-    console.log(data.ErrMsg);
+    // console.log(data.ErrMsg);
   } else {
     result.data = JSON.parse(data.RetData) as any;
   }
@@ -81,7 +81,7 @@ export async function getProductionLineInfo(param: any) {
   if (!data.IsSuccess) {
     result.msg = data.ErrMsg;
     // eslint-disable-next-line no-console
-    console.log(data.ErrMsg);
+    // console.log(data.ErrMsg);
   } else {
     result.data = JSON.parse(data.RetData) as any;
   }
@@ -103,7 +103,7 @@ export async function getEmployeeLeader(param: any) {
   if (!data.IsSuccess) {
     result.msg = data.ErrMsg;
     // eslint-disable-next-line no-console
-    console.log(data.ErrMsg);
+    // console.log(data.ErrMsg);
   } else {
     result.data = JSON.parse(data.RetData) as any;
   }
@@ -125,7 +125,7 @@ export async function getHourProductionInfo(param: any) {
   if (!data.IsSuccess) {
     result.msg = data.ErrMsg;
     // eslint-disable-next-line no-console
-    console.log(data.ErrMsg);
+     // console.log(data.ErrMsg);
   } else {
     result.data = JSON.parse(data.RetData) as any;
   }
@@ -147,7 +147,7 @@ export async function getCompletionRate(param: any) {
   if (!data.IsSuccess) {
     result.msg = data.ErrMsg;
     // eslint-disable-next-line no-console
-    console.log(data.ErrMsg);
+    // console.log(data.ErrMsg);
   } else {
     result.data = JSON.parse(data.RetData) as any;
   }
@@ -169,7 +169,7 @@ export async function getPPH(param: any) {
   if (!data.IsSuccess) {
     result.msg = data.ErrMsg;
     // eslint-disable-next-line no-console
-    console.log(data.ErrMsg);
+    // console.log(data.ErrMsg);
   } else {
     result.data = JSON.parse(data.RetData) as any;
   }
@@ -191,11 +191,10 @@ export async function getGroupMembers(param: any) {
   if (!data.IsSuccess) {
     result.msg = data.ErrMsg;
     // eslint-disable-next-line no-console
-    console.log(data.ErrMsg);
+    // console.log(data.ErrMsg);
   } else {
     result.data = JSON.parse(data.RetData) as any;
   }
-  console.log(result.data);
   
   return result;
 }
@@ -215,7 +214,7 @@ export async function getEquipmentManagement(param: any) {
   if (!data.IsSuccess) {
     result.msg = data.ErrMsg;
     // eslint-disable-next-line no-console
-    console.log(data.ErrMsg);
+     // console.log(data.ErrMsg);
   } else {
     result.data = JSON.parse(data.RetData) as any;
   }
@@ -237,7 +236,7 @@ export async function getProblemTracking(param: any) {
   if (!data.IsSuccess) {
     result.msg = data.ErrMsg;
     // eslint-disable-next-line no-console
-    console.log(data.ErrMsg);
+    // console.log(data.ErrMsg);
   } else {
     result.data = JSON.parse(data.RetData) as any;
   }
@@ -259,7 +258,7 @@ export async function getShoesModelYield(param: any) {
   if (!data.IsSuccess) {
     result.msg = data.ErrMsg;
     // eslint-disable-next-line no-console
-    console.log(data.ErrMsg);
+    // console.log(data.ErrMsg);
   } else {
     result.data = JSON.parse(data.RetData) as any;
   }
@@ -281,7 +280,7 @@ export async function getQualityManagement(param: any) {
   if (!data.IsSuccess) {
     result.msg = data.ErrMsg;
     // eslint-disable-next-line no-console
-    console.log(data.ErrMsg);
+    // console.log(data.ErrMsg);
   } else {
     result.data = JSON.parse(data.RetData) as any;
   }
