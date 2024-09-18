@@ -21,6 +21,8 @@ export interface postobj {
   UserToken: string;
   Data: any;
 }
+
+
 export interface LoginParameterData {
   CompanyCode: string;
   CompanyName: string;
@@ -35,11 +37,14 @@ export interface ResultParameter {
   RetData: string;
   RetData1: string;
 }
+
+
 export function scmpost(
   DllName: string,
   ClassName: string,
   Method: string,
-  Data: any
+  Data: any,
+  UserToken: string
 ): ResultParameter {
   const Parameter: postobj = {
     DllName: '',
@@ -50,13 +55,15 @@ export function scmpost(
     IsRasRequst: false,
     IsRasResult: false,
     RasResultKey: '',
-    UserToken: localStorage.getItem('token') as string,
+    UserToken: '',
     Data: '',
   };
   Parameter.DllName = DllName;
   Parameter.ClassName = ClassName;
   Parameter.Method = Method;
+  Parameter.UserToken = UserToken;  // Sử dụng UserToken truyền vào
   Parameter.Data = Data;
+
   const result = axios.post<ResultParameter>(
     defaultSettings.api_url,
     Parameter

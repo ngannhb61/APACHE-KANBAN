@@ -50,7 +50,8 @@ export async function Getorg() {
     'KZ_WMSAPI',
     'KZ_WMSAPI.Controllers.F_WMS_Miscellaneous_Server',
     'LoadOrg',
-    {}
+    {},
+    'auto-scheduling'
   );
   if (!data.IsSuccess) {
     throw new Error(data.ErrMsg);
@@ -65,7 +66,8 @@ export async function Getfactory() {
     'KZ_SFCAPI',
     'KZ_SFCAPI.Controllers.ProductionDashBoardServer',
     'LoadPlant',
-    {}
+    {},
+    'auto-scheduling'
   );
   if (!data.IsSuccess) {
     throw new Error(data.ErrMsg);
@@ -84,7 +86,8 @@ export async function GetMaintenanceList(param: any) {
     'GetMaintenanceList',
     {
       org_id: param.selectorg,
-    }
+    },
+    'auto-scheduling'
   );
   if (!data.IsSuccess) {
     // console.log(data.ErrMsg);
@@ -105,7 +108,8 @@ export async function RepairList(param: any) {
     'GetRepairList',
     {
       org_id: param.selectorg,
-    }
+    },
+    'auto-scheduling'
   );
   if (!data.IsSuccess) {
     // console.log(data.ErrMsg);
@@ -126,7 +130,8 @@ export async function DevicestatusRate(param: any) {
     'DevicestatusRate',
     {
       org_id: param.selectorg,
-    }
+    },
+    'auto-scheduling'
   );
   if (!data.IsSuccess) {
     // console.log(data.ErrMsg);
@@ -148,7 +153,8 @@ export async function MaintenanceCompletionRate(param: any) {
       org_id: param.selectorg,
       date_begin: param.selectdate[0],
       date_end: param.selectdate[1],
-    }
+    },
+    'auto-scheduling'
   );
   if (!data.IsSuccess) {
     // console.log(data.ErrMsg);
@@ -171,7 +177,8 @@ export async function RepairCompletionRate(param: any) {
       org_id: param.selectorg,
       date_begin: param.selectdate[0],
       date_end: param.selectdate[1],
-    }
+    },
+    'auto-scheduling'
   );
   if (!data.IsSuccess) {
     // console.log(data.ErrMsg);
@@ -195,7 +202,8 @@ export async function GetMaintenanceDetail01(param: any) {
       date_begin: param.selectdate[0],
       date_end: param.selectdate[1],
       udf05: param.factory_area,
-    }
+    },
+    'auto-scheduling'
   );
   if (!data.IsSuccess) {
     // (data.ErrMsg);
@@ -219,7 +227,8 @@ export async function GetMaintenanceDetail02(param: any) {
       date_begin: param.selectdate[0],
       date_end: param.selectdate[1],
       udf05: param.factory_area,
-    }
+    },
+    'auto-scheduling'
   );
   if (!data.IsSuccess) {
     // console.log(data.ErrMsg);
@@ -243,7 +252,8 @@ export async function GetRepairDetail(param: any) {
       date_begin: param.selectdate[0],
       date_end: param.selectdate[1],
       udf05: param.factory_area,
-    }
+    },
+    'auto-scheduling'
   );
   if (!data.IsSuccess) {
     // console.log(data.ErrMsg);
@@ -262,7 +272,8 @@ export async function GetToplist() {
     'KZ_EPMAPI',
     'KZ_EPMAPI.Controllers.MachineKanBanServer',
     'GetToplist',
-    {}
+    {},
+    'auto-scheduling'
   );
   if (!data.IsSuccess) {
     // console.log(data.ErrMsg);

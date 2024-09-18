@@ -51,7 +51,8 @@ export async function DeliyProductionQuery(params: PolicyParams, model: any) {
       Scan_Date: model.createdTime[0],
       Scan_Date2: model.createdTime[1],
       Org_id: model.company,
-    }
+    },
+    'auto-scheduling'
   );
   if (!data.IsSuccess) {
     throw new Error(data.ErrMsg);

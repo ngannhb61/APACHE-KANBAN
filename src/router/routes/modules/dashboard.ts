@@ -22,16 +22,16 @@ const DASHBOARD: AppRouteRecordRaw = {
         roles: ['*'],
       },
     },
-    {
-      path: 'ProcessLineDashboard',
-      name: 'Process Line Dashboard',
-      component: () => import('@/views/dashboard/ProcessLineDashboard/index.vue'),
-      meta: {
-        locale: 'menu.dashboard.ProcessLineDashboard',
-        requiresAuth: false,
-        roles: ['*'],
-      },
-    },
+    // {
+    //   path: 'ProcessLineDashboard',
+    //   name: 'Process Line Dashboard',
+    //   component: () => import('@/views/dashboard/ProcessLineDashboard/index.vue'),
+    //   meta: {
+    //     locale: 'menu.dashboard.ProcessLineDashboard',
+    //     requiresAuth: false,
+    //     roles: ['*'],
+    //   },
+    // },
   ],
 };
 

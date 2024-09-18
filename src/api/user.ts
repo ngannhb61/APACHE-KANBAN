@@ -24,7 +24,8 @@ export function login(data: LoginData): ResultParameter {
     CompanyName: defaultSettings.CompanyName,
     UserCode: data.username,
     UserPassword: password,
-  }) as unknown as ResultParameter;
+  },
+  'auto-scheduling') as unknown as ResultParameter;
 }
 export function logout() {
   return {
@@ -50,7 +51,8 @@ export async function getMenuList(): Promise<any> {
     'KZ_EPMAPI',
     'KZ_EPMAPI.Controllers.KANBAN_COMMAND_SERVER',
     'GetUserMenu',
-    {}
+    {},
+    'auto-scheduling'
   ) as unknown as ResultParameter;
 }
 
@@ -61,7 +63,8 @@ export async function getMenuListByRole(
     'KZ_EPMAPI',
     'KZ_EPMAPI.Controllers.KANBAN_COMMAND_SERVER',
     'GetUserMenuByRole',
-    { scm_rule: role }
+    { scm_rule: role },
+    'auto-scheduling'
   ) as unknown as ResultParameter;
 }
 
@@ -108,6 +111,7 @@ export async function SaveMenuListByRole(
     'KZ_EPMAPI',
     'KZ_EPMAPI.Controllers.KANBAN_COMMAND_SERVER',
     'SaveMenuListByRole',
-    { scm_rule: role, list: menu }
+    { scm_rule: role, list: menu },
+    'auto-scheduling'
   ) as unknown as ResultParameter;
 }

@@ -18,14 +18,22 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: 'login',
+      redirect: 'process',
     },
     {
-      path: '/login',
+      path: '/process',
       name: 'login',
-      component: () => import('@/views/login/index.vue'),
+      component: () => import('@/views/dashboard/ProcessLineDashboard/index.vue'),
       meta: {
         requiresAuth: false,
+      },
+    },
+    {
+      path: '/',
+      name: 'Process Line Dashboard',
+      component: () => import('@/views/dashboard/ProcessLineDashboard/index.vue'),
+      meta: {
+        requiresAuth: false
       },
     },
     ...appRoutes,

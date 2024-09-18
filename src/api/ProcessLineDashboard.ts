@@ -13,13 +13,13 @@ export async function GetServerTime() {
     'KZ_EAPAPI',
     'KZ_EAPAPI.Controllers.MachineLinkCollectServer',
     'GetNowTime',
-    {}
+    {},
+    'auto-scheduling'  // Truyền UserToken tại đây
   );
+  
   result.status = data.IsSuccess;
   if (!data.IsSuccess) {
     result.msg = data.ErrMsg;
-    // eslint-disable-next-line no-console
-    // console.log(data.ErrMsg);
   } else {
     result.data = data.RetData;
   }
@@ -33,7 +33,8 @@ export async function LoadDepartment() {
     'KZ_MESAPI',
     'KZ_MESAPI.Controllers.F_Manual_WareHousingServer',
     'LoadDepartment',
-    {}
+    {},
+    'auto-scheduling'
   );
   result.status = data.IsSuccess;
   if (!data.IsSuccess) {
@@ -53,7 +54,8 @@ export async function LoadDeptGroup() {
     'KZ_MESAPI',
     'KZ_MESAPI.Controllers.WorkCenterDashboardServer',
     'LoadDeptGroup',
-    {}
+    {},
+    'auto-scheduling'
   );
   result.status = data.IsSuccess;
   if (!data.IsSuccess) {
@@ -75,7 +77,8 @@ export async function getProductionLineInfo(param: any) {
     'getProductionLineInfo',
     {
       department_code: param.departmentCode,
-    }
+    },
+    'auto-scheduling'
   );
   result.status = data.IsSuccess;
   if (!data.IsSuccess) {
@@ -97,7 +100,8 @@ export async function getEmployeeLeader(param: any) {
     'getEmployeeLeader',
     {
       department_code: param.departmentCode,
-    }
+    },
+    'auto-scheduling'
   );
   result.status = data.IsSuccess;
   if (!data.IsSuccess) {
@@ -119,7 +123,8 @@ export async function getHourProductionInfo(param: any) {
     'getProductionInfo',
     {
       department_code: param.departmentCode,
-    }
+    },
+    'auto-scheduling'
   );
   result.status = data.IsSuccess;
   if (!data.IsSuccess) {
@@ -141,7 +146,8 @@ export async function getCompletionRate(param: any) {
     'getCompletionRate',
     {
       department_code: param.departmentCode,
-    }
+    },
+    'auto-scheduling'
   );
   result.status = data.IsSuccess;
   if (!data.IsSuccess) {
@@ -163,7 +169,8 @@ export async function getPPH(param: any) {
     'getPPH',
     {
       department_code: param.departmentCode,
-    }
+    },
+    'auto-scheduling'
   );
   result.status = data.IsSuccess;
   if (!data.IsSuccess) {
@@ -185,7 +192,8 @@ export async function getGroupMembers(param: any) {
     'getGroupMembers',
     {
       department_code: param.departmentCode,
-    }
+    },
+    'auto-scheduling'
   );
   result.status = data.IsSuccess;
   if (!data.IsSuccess) {
@@ -208,7 +216,8 @@ export async function getEquipmentManagement(param: any) {
     'getEquipmentManagement',
     {
       department_code: param.departmentCode,
-    }
+    },
+    'auto-scheduling'
   );
   result.status = data.IsSuccess;
   if (!data.IsSuccess) {
@@ -230,7 +239,8 @@ export async function getProblemTracking(param: any) {
     'getProblemTracking',
     {
       department_code: param.departmentCode,
-    }
+    },
+    'auto-scheduling'
   );
   result.status = data.IsSuccess;
   if (!data.IsSuccess) {
@@ -252,7 +262,8 @@ export async function getShoesModelYield(param: any) {
     'getShoesModelYield',
     {
       department_code: param.departmentCode,
-    }
+    },
+    'auto-scheduling'
   );
   result.status = data.IsSuccess;
   if (!data.IsSuccess) {
@@ -274,7 +285,8 @@ export async function getQualityManagement(param: any) {
     'getQualityManagement',
     {
       department_code: param.departmentCode,
-    }
+    },
+    'auto-scheduling'
   );
   result.status = data.IsSuccess;
   if (!data.IsSuccess) {
