@@ -18,7 +18,7 @@
                   <a-select
                     v-model="productionGroup"
                     size="large"
-                    :style="{ width: '220px' }"
+                    :style="{ width: '250px' }"
                     @change="handleChangeProGroup"
                   >
                   <a-option
@@ -127,7 +127,7 @@
                   <a-select
                     v-model="productionGroup2"
                     size="large"
-                    :style="{ width: '220px' }"
+                    :style="{ width: '250px' }"
                     @change="handleChangeProGroup2"
                   >
                   <a-option

@@ -31,77 +31,79 @@
 </script>
   
   <style>
-  body {
-    margin: 0;
-    padding: 0;
-  }
+    body {
+      margin: 0;
+      padding: 0;
+    }
   
-  .menu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-family:Arial, Helvetica, sans-serif;
-    padding: 10px;
-    background-size: cover;
-    background-repeat: no-repeat;
-    min-height: 100vh;
-  }
-  
-  .menu-title {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-    color:#333;
-  }
-  
-  .menu-links {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 250px;
-  }
-  
-  .menu-link {
-    margin-bottom: 10px;
-  }
-  
-  .menu-link-item {
-    text-decoration: none;
-    border-block-end: solid; 
-    writing-mode: horizontal-tb;
-    color: #0ee4f9;
-    transition: color 0.3s;
-    padding-right: 10px;
-    font-size: 90px;
-  }
-  
-  .menu-link-item:hover {
-    transform: scale(1.1);
-    color:rgb(250, 249, 249)
-  }
-  
-  .language-select {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-  }
-  
-  .el-select {
-    width: 300px;
-  }
+    .menu {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-family:Arial, Helvetica, sans-serif;
+      padding: 10px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+    }
+    
+    .menu-title {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color:#333;
+    }
+    
+    .menu-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 250px;
+    }
+    
+    .menu-link {
+      margin-bottom: 10px;
+    }
+    
+    .menu-link-item {
+      text-decoration: none;
+      display: inline-block; 
+      border-block-end: solid;
+      writing-mode: horizontal-tb;
+      color: #0ee4f9;
+      transition: transform 0.3s, color 0.3s; 
+      padding-right: 10px;
+      font-size: 90px;
+    }
 
-  .max-height {
-    height: 100%;
-  }
+    .menu-link-item:hover {
+      transform: scale(1.1);
+      color: rgb(250, 249, 249);
+    }
 
-  .max-width {
-    width: 100%;
-  }
+    
+    .language-select {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+    }
+    
+    .el-select {
+      width: 300px;
+    }
 
-  .flex-column {
-    display: flex;
-    flex-direction: column;
-  }
+    .max-height {
+      height: 100%;
+    }
+
+    .max-width {
+      width: 100%;
+    }
+
+    .flex-column {
+      display: flex;
+      flex-direction: column;
+    }
   </style>
   
