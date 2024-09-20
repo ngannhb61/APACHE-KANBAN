@@ -18,24 +18,40 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: 'process',
+      redirect: 'home',
     },
     {
-      path: '/process',
-      name: 'login',
-      component: () => import('@/views/dashboard/ProcessLineDashboard/index.vue'),
+      path: '/home',
+      name: 'Home',
+      component: () => import('@/views/Home/index.vue'),
       meta: {
         requiresAuth: false,
       },
     },
     {
-      path: '/',
+      path: '/daily',
+      name: 'Daily',
+      component: () => import('@/views/DalyDashboard/index.vue'),
+      meta: {
+        requiresAuth: false,
+      },
+    },
+    {
+      path: '/process',
       name: 'Process Line Dashboard',
       component: () => import('@/views/dashboard/ProcessLineDashboard/index.vue'),
       meta: {
-        requiresAuth: false
+        requiresAuth: false,
       },
     },
+    // {
+    //   path: '/actual',
+    //   name: 'Actual Daily',
+    //   component: DailyActual,
+    //   meta: {
+    //     requiresAuth: false
+    //   },
+    // },
     ...appRoutes,
     REDIRECT_MAIN,
     NOT_FOUND_ROUTE,

@@ -47,6 +47,26 @@ export async function LoadDepartment() {
   return result;
 }
 
+export async function LoadDepartment2() {
+  const result: ResponseResult = { data: [], msg: '', status: true };
+  const data: ResultParameter = await scmpost(
+    'KZ_MESAPI',
+    'KZ_MESAPI.Controllers.F_Manual_WareHousingServer',
+    'LoadDepartment',
+    {},
+    '80da2d7d-f683-4157-a82c-fda17935343b'
+  );
+  result.status = data.IsSuccess;
+  if (!data.IsSuccess) {
+    result.msg = data.ErrMsg;
+    // eslint-disable-next-line no-console
+     // console.log(data.ErrMsg);
+  } else {
+    result.data = data.RetData;
+  }
+  return result;
+}
+
 // 查询生产组别
 export async function LoadDeptGroup() {
   const result: ResponseResult = { data: [], msg: '', status: true };
@@ -68,6 +88,28 @@ export async function LoadDeptGroup() {
   return result;
 }
 
+export async function LoadDeptGroup2() {
+  const result: ResponseResult = { data: [], msg: '', status: true };
+  const data: ResultParameter = await scmpost(
+    'KZ_MESAPI',
+    'KZ_MESAPI.Controllers.WorkCenterDashboardServer',
+    'LoadDeptGroup',
+    {},
+    '80da2d7d-f683-4157-a82c-fda17935343b'
+  );
+  result.status = data.IsSuccess;
+  if (!data.IsSuccess) {
+    result.msg = data.ErrMsg;
+    // eslint-disable-next-line no-console
+    // console.log(data.ErrMsg);
+  } else {
+    result.data = JSON.parse(data.RetData) as any;
+  }
+  return result;
+}
+
+
+
 // 查询生产线基本信息
 export async function getProductionLineInfo(param: any) {
   const result: ResponseResult = { data: [], msg: '', status: true };
@@ -79,6 +121,28 @@ export async function getProductionLineInfo(param: any) {
       department_code: param.departmentCode,
     },
     'auto-scheduling'
+  );
+  result.status = data.IsSuccess;
+  if (!data.IsSuccess) {
+    result.msg = data.ErrMsg;
+    // eslint-disable-next-line no-console
+    // console.log(data.ErrMsg);
+  } else {
+    result.data = JSON.parse(data.RetData) as any;
+  }
+  return result;
+}
+
+export async function getProductionLineInfo2(param: any) {
+  const result: ResponseResult = { data: [], msg: '', status: true };
+  const data: ResultParameter = await scmpost(
+    'KZ_MESAPI',
+    'KZ_MESAPI.Controllers.WorkCenterDashboardServer',
+    'getProductionLineInfo2',
+    {
+      department_codee: param.departmentCodee,
+    },
+    '80da2d7d-f683-4157-a82c-fda17935343b'
   );
   result.status = data.IsSuccess;
   if (!data.IsSuccess) {

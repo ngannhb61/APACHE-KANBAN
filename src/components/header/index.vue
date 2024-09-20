@@ -215,10 +215,10 @@
   function toHome() {
     // console.log('跳转主页面');
     exitFullScreen();
-    // window.location.href = '/#/homePage/workplace';
-    router.push({
-      name: 'Workplace',
-    });
+    window.location.href = '/#/home';
+    // router.push({
+    //   name: 'Home',
+    // });
   }
 
   function toggleFullScreen() {
@@ -261,9 +261,11 @@
     display: flex;
     position: absolute;
     z-index: 2000;
-    // height: 80px;
+    // height: 100px;
     width: 100%;
     pointer-events: auto;
+    margin: 0;
+    padding: 0;
     cursor: default;
     background: linear-gradient(
       to bottom,
