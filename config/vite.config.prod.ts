@@ -19,13 +19,18 @@ export default mergeConfig(
     build: {
       rollupOptions: {
         output: {
-          manualChunks: {
-            arco: ['@arco-design/web-vue'],
-            chart: ['echarts', 'vue-echarts'],
-            vue: ['vue', 'vue-router', 'pinia', '@vueuse/core', 'vue-i18n'],
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              // Tạo chunks riêng cho các thư viện từ node_modules
+              return id
+                .toString()
+                .split('node_modules/')[1]
+                .split('/')[0]
+                .toString();
+            }
           },
         },
-      },
+      },      
       chunkSizeWarningLimit: 2000,
     },
     resolve: {

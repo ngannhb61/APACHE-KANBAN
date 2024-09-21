@@ -8,9 +8,9 @@
 </template>
 
 <script setup lang="ts">
-  import { ref, watch, onMounted, onBeforeUnmount } from 'vue';
+  import { ref, watch, onMounted, onBeforeUnmount , onUpdated } from 'vue';
   import { ECharts, EChartsOption, init } from 'echarts';
-  import { onUpdated } from 'vue';
+  
 
   // 定义props
   interface Props {

@@ -223,8 +223,8 @@
   import { useRouter, useRoute } from 'vue-router';
   import useLoading from '@/hooks/loading';
   import { Message } from '@arco-design/web-vue';
-  import { ref, onMounted } from 'vue';
-  import { onBeforeUpdate } from 'vue';
+  import { ref, onMounted , onBeforeUpdate } from 'vue';
+  
 
   const generateFormModel = () => {
     return {

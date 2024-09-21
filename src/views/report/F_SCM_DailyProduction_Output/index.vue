@@ -436,7 +436,7 @@
 
 <script lang="ts">
   export default {
-    name: 'DailyProduction_Output',
+    name: 'DailyProductionOutput',
   };
 </script>
 
